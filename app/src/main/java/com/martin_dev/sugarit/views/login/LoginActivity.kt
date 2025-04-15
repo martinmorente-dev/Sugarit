@@ -4,27 +4,21 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.button.MaterialButton
 import com.martin_dev.sugarit.R
+import com.martin_dev.sugarit.databinding.ActivityLoginBinding
 import com.martin_dev.sugarit.views.menu.MenuActivity
 import com.martin_dev.sugarit.views.registrate.RegistrationActivity
 
-private lateinit var btnLogin: MaterialButton
-private lateinit var btnRegistration: MaterialButton
 
 class LoginActivity : AppCompatActivity() {
+    private lateinit var binding : ActivityLoginBinding
+
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
-        init()
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         init_listenners()
-    }
-
-    private fun init()
-    {
-        btnLogin = findViewById(R.id.btn_login)
-        btnRegistration = findViewById(R.id.btn_registration)
     }
 
     private fun init_listenners()
@@ -32,8 +26,8 @@ class LoginActivity : AppCompatActivity() {
         val listenner = View.OnClickListener { view ->
             navigation(view)
         }
-        btnLogin.setOnClickListener(listenner)
-        btnRegistration.setOnClickListener(listenner)
+        binding.btnLogin.setOnClickListener(listenner)
+        binding.btnRegistration.setOnClickListener(listenner)
     }
 
     private fun navigation(view: View)
@@ -44,5 +38,4 @@ class LoginActivity : AppCompatActivity() {
             R.id.btn_registration -> startActivity(Intent(this, RegistrationActivity::class.java))
         }
     }
-
 }
