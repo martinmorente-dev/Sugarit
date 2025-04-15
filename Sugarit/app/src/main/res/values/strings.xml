@@ -1,0 +1,31 @@
+<resources>
+
+    <string name="app_name">Sugarit</string>
+    <string name="fridge_question">¿Que hay en la nevera?</string>
+
+    <!-- Login -->
+
+    <string name="entry">Entrar</string>
+    <string name="username">usuario:</string>
+    <string name="user_passowrd">contraseña:</string>
+    <string name="registration">Registrame</string>
+
+
+    <!-- Food -->
+
+    <string name="text_food">Prueba a hacer una foto a tu comida</string>
+    <string name="excalamation">¡</string>
+    <string name="close_excalamation">!</string>
+
+    <!-- Recipe -->
+
+    <string name="fridge_txt">¿Qué hay en la nevera?</string>
+
+    <!-- Contexts -->
+
+    <string name="img_food_context">Botón del menú para ir a la pantalla de escaneo de comida</string>
+    <string name="img_recipe_context">Botón del menú para ir a la pantalla de recetas por nivel de azúcar y condimentos que tengas en al nevera</string>
+    <string name="camera_context">Imagen para encender la cámara del móvil y escanear la comida</string>
+    <string name="fridge_context">Imagen nevera</string>
+
+</resources>
