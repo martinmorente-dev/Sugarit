@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.martin_dev.sugarit.R
+import com.martin_dev.sugarit.backend.controller.login.LoginController
 import com.martin_dev.sugarit.databinding.ActivityLoginBinding
 import com.martin_dev.sugarit.views.menu.MenuActivity
 import com.martin_dev.sugarit.views.registrate.RegistrationActivity
@@ -34,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
     {
         when(view.id)
         {
-            R.id.btn_login -> startActivity(Intent(this, MenuActivity::class.java))
+            R.id.btn_login -> LoginController(binding.username.text.toString(),binding.userPasswd.text.toString(),this).login()
             R.id.btn_registration -> startActivity(Intent(this, RegistrationActivity::class.java))
         }
     }

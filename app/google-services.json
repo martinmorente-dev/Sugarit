@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "731685620962",
+    "project_id": "sugarit-bbdd",
+    "storage_bucket": "sugarit-bbdd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:731685620962:android:f05d63cd29e6d8ae85a2bb",
+        "android_client_info": {
+          "package_name": "com.martin_dev.sugarit"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDny6NiV9pfH7fvO7HOc6NCUucSe26NIVI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

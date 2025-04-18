@@ -3,7 +3,6 @@ package com.martin_dev.sugarit.views.registrate
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.button.MaterialButton
 import com.martin_dev.sugarit.R
 import com.martin_dev.sugarit.databinding.ActivityRegistrationBinding
 import com.martin_dev.sugarit.views.menu.MenuActivity
