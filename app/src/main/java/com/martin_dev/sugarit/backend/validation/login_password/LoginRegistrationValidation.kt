@@ -1,10 +1,10 @@
-package com.martin_dev.sugarit.backend.validation.login
+package com.martin_dev.sugarit.backend.validation.login_password
 
 import android.content.Context
 import android.util.Patterns
 import com.martin_dev.sugarit.backend.validation.AlertMessage
 
-class LoginValidation
+class LoginRegistrationValidation
 {
     fun validation(email: String, password: String, context: Context): Boolean
     {
@@ -27,5 +27,4 @@ class LoginValidation
     {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
-
 }

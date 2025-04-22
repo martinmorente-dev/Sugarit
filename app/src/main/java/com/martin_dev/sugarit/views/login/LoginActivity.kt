@@ -5,9 +5,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.martin_dev.sugarit.R
-import com.martin_dev.sugarit.backend.controller.registration.RegistrationController
+import com.martin_dev.sugarit.backend.controller.login.LoginController
 import com.martin_dev.sugarit.databinding.ActivityLoginBinding
 import com.martin_dev.sugarit.views.registration.RegistrationActivity
+import com.martin_dev.sugarit.views.utils.ToastManager.messageToast
 
 
 class LoginActivity : AppCompatActivity() {
@@ -18,6 +19,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        messageToast(this,intent.getStringExtra("toast_message") ?: "")
         init_listenners()
     }
 
@@ -34,7 +36,7 @@ class LoginActivity : AppCompatActivity() {
     {
         when(view.id)
         {
-            R.id.btn_login -> RegistrationController(binding.username.text.toString(),binding.userPasswd.text.toString(),this).login()
+            R.id.btn_login -> LoginController(binding.username.text.toString(),binding.userPasswd.text.toString(),this).login()
             R.id.btn_registration -> startActivity(Intent(this, RegistrationActivity::class.java))
         }
     }
