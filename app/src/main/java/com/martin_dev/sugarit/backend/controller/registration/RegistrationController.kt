@@ -1,14 +1,15 @@
-package com.martin_dev.sugarit.backend.controller.login
+package com.martin_dev.sugarit.backend.controller.registration
 
 import android.content.Context
 import android.content.Intent
 import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
+import com.martin_dev.sugarit.backend.validation.AlertMessage
 import com.martin_dev.sugarit.backend.validation.login.LoginValidation
 import com.martin_dev.sugarit.views.menu.MenuActivity
 import com.martin_dev.sugarit.views.registration.RegistrationActivity
 
-class LoginController()
+class RegistrationController()
 {
     private lateinit var email: String
     private lateinit var password: String
@@ -20,17 +21,20 @@ class LoginController()
         this.context=context
     }
 
-    fun login()
+    fun registrate()
     {
         val validator = LoginValidation().validation(this.email,this.password,this.context)
 
         if(validator)
         {
-            FirebaseAuth.getInstance().signInWithEmailAndPassword(this.email,this.password).addOnCompleteListener {
-                if(it.isSuccessful)
-                   navigationToActivity(MenuActivity::class.java)
-                else
-                    navigationToActivity(RegistrationActivity::class.java)
+            FirebaseAuth.getInstance().createUserWithEmailAndPassword(this.email,this.password).addOnCompleteListener {
+                when
+                {
+                    it.isSuccessful -> navigationToActivity(MenuActivity::class.java)
+                    else -> {
+                        AlertMessage().createAlert("Registration Failed",this.context)
+                    }
+                }
             }
         }
     }

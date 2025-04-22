@@ -1,7 +1,8 @@
-package com.martin_dev.sugarit.views.registrate
+package com.martin_dev.sugarit.views.registration
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.martin_dev.sugarit.R
 import com.martin_dev.sugarit.databinding.ActivityRegistrationBinding
@@ -15,14 +16,21 @@ class RegistrationActivity : AppCompatActivity() {
         setContentView(R.layout.activity_registration)
         binding = ActivityRegistrationBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        messageFromLogin()
         initListenner()
     }
-
 
     private fun initListenner()
     {
         binding.btnRegistration.setOnClickListener{
             startActivity(Intent(this, MenuActivity::class.java))
         }
+    }
+
+    private fun messageFromLogin()
+    {
+        val toastMessage = intent.getStringExtra("toast_message")
+        if(!toastMessage.isNullOrBlank())
+            Toast.makeText(this,toastMessage,Toast.LENGTH_LONG).show()
     }
 }

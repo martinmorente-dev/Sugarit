@@ -19,7 +19,7 @@
             android:name=".views.food.FoodActivity"
             android:exported="false" />
         <activity
-            android:name=".views.registrate.RegistrationActivity"
+            android:name=".views.registration.RegistrationActivity"
             android:exported="false" />
         <activity
             android:name=".views.menu.MenuActivity"
