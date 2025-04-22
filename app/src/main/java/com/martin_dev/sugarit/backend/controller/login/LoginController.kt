@@ -28,19 +28,31 @@ class LoginController()
         {
             FirebaseAuth.getInstance().signInWithEmailAndPassword(this.email,this.password).addOnCompleteListener {
                 if(it.isSuccessful)
-                   navigationToActivity(MenuActivity::class.java)
+                   navigationToActivity(MenuActivity::class.java,"Welcome")
                 else
-                    navigationToActivity(RegistrationActivity::class.java)
+                    navigationToActivity(RegistrationActivity::class.java,"Need registration")
             }
         }
     }
 
-    private fun navigationToActivity(navigateTo: Class<*>)
+    private fun navigationToActivity(navigateTo: Class<*>,messageType: String)
     {
         val intent = (Intent(this.context, navigateTo))
+        val messageToast: String = setMessageToast(messageType)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        intent.putExtra("toast_message","Necesitas registrarte")
+        intent.putExtra("toast_message",messageToast)
         ContextCompat.startActivity(this.context,intent,null)
+    }
+
+    private fun setMessageToast(messageType: String) : String
+    {
+        var messageToast = ""
+        when(messageType)
+        {
+            "Welcome" -> messageToast = "Bienvenido de nuevo"
+            "Need registration" -> messageToast = "Necesitas registrarte para entrar"
+        }
+        return messageToast
     }
 
 }
