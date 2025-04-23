@@ -9,6 +9,7 @@ class LoginRegistrationValidation
     fun validation(email: String, password: String, context: Context): Boolean
     {
         val alert = AlertMessage()
+        val specialCharacters = setOf('*', '-', '/', ':', '!', '@', '#', '$', '%', '&', '¡', '¿', '?')
         when
         {
             email.isEmpty() || password.isEmpty() -> {
@@ -17,6 +18,26 @@ class LoginRegistrationValidation
             }
             !isEmailValid(email) -> {
                 alert.createAlert("Wrong email",context)
+                return false
+            }
+            password.length < 6 -> {
+                alert.createAlert("Malformed password Length",context)
+                return false
+            }
+            !password.any {it.isUpperCase()} -> {
+                alert.createAlert("Malformed password Upper",context)
+                return false
+            }
+            !password.any {it.isLowerCase()} -> {
+                alert.createAlert("Malformed password Lower",context)
+                return false
+            }
+            !password.any{it.isDigit()} -> {
+                alert.createAlert("Malformed password Digit",context)
+                return false
+            }
+            !password.any{ it in specialCharacters } -> {
+                alert.createAlert("Malformed password Special Char",context)
                 return false
             }
         }
