@@ -28,15 +28,10 @@ class RegistrationController() {
         if (validator && !isRegistered(this.email,this.password))
         {
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(this.email.toString(), this.password.toString()).addOnCompleteListener {
-                    if(it.isSuccessful) {
-                        Log.i("Succesful","Creacion")
+                    if(it.isSuccessful)
                         ToastComponent().navigationToActivity(MenuActivity::class.java,"Welcome",this.context)
-                    }
                     else
-                    {
-                        Log.i("Failed","Fallo la creacion")
                         AlertMessage().createAlert("Registration Failed", this.context)
-                    }
             }
         }
         else
