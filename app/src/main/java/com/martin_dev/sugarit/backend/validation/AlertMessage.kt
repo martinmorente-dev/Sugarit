@@ -30,6 +30,7 @@ class AlertMessage
             "Malformed password Lower" -> message = "La contraseña debe tener al menos una minúscula"
             "Malformed password Digit" -> message = "La contraseña debe tener al menos un digito"
             "Malformed password Special Char" -> message = "La contraseña tiene que tener caracteres especiales"
+            "Email not sended" -> message = "Ahora mismo no se pudo enviar el correo de verificación inténtelo más tarde"
         }
         return(message)
     }

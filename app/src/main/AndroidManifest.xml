@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Sugarit"
         tools:targetApi="31">
         <activity
+            android:name=".views.splashes.email.EmailVerificationActivity"
+            android:exported="false" />
+        <activity
             android:name=".views.recipie.RecipieActivity"
             android:exported="false" />
         <activity

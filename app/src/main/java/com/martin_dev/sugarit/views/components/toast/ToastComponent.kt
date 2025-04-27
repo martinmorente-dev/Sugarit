@@ -22,7 +22,7 @@ class ToastComponent
         {
             "Welcome" -> messageToast = "Bienvenido de nuevo"
             "Need registration" -> messageToast = "Necesitas registrarte para entrar"
-            "Is registered" -> messageToast = "¿Olvidaste tu contraseña?"
+            "Is registered" -> messageToast = "Este usuario ya esta registrado"
         }
         return messageToast
     }
