@@ -44,10 +44,13 @@ class EmailVerificationActivity : AppCompatActivity() {
         lifecycleScope.launch {
             val startTime = System.currentTimeMillis()
 
-            while (System.currentTimeMillis() - startTime < VERIFICATION_TIMEOUT) {
+            while (System.currentTimeMillis() - startTime < VERIFICATION_TIMEOUT)
+            {
                 auth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        if (auth.currentUser?.isEmailVerified == true) {
+                    if (it.isSuccessful)
+                    {
+                        if (auth.currentUser?.isEmailVerified == true)
+                        {
                             startActivity(Intent(this@EmailVerificationActivity, MenuActivity::class.java))
                             finish()
                             return@addOnCompleteListener
@@ -60,21 +63,24 @@ class EmailVerificationActivity : AppCompatActivity() {
         }
     }
 
-    private fun deleteUserAccount() {
+    private fun deleteUserAccount()
+    {
         val currentUser = auth.currentUser
         currentUser?.delete()?.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
+            if (task.isSuccessful)
+            {
                 Log.d("EmailVerification", "User account deleted due to unverified email.")
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
                 finish()
-            } else {
-                Log.e("EmailVerification", "Failed to delete user account.")
             }
+            else
+                Log.e("EmailVerification", "Failed to delete user account.")
         }
     }
 
-    private fun initListeners() {
+    private fun initListeners()
+    {
         binding.resendEmailBtn.setOnClickListener {
             resendEmail()
         }
@@ -82,16 +88,17 @@ class EmailVerificationActivity : AppCompatActivity() {
 
     private fun resendEmail() {
         auth.currentUser?.sendEmailVerification()?.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
+            if (task.isSuccessful)
+            {
                 binding.txtStatus.text = "Correo reenviado. ¡Revisa tu bandeja de entrada!"
                 binding.resendEmailBtn.isEnabled = false
                 lifecycleScope.launch {
                     delay(60000L)
                     binding.resendEmailBtn.isEnabled = true
                 }
-            } else {
-                AlertMessage().createAlert("Email not sent", this)
             }
+            else
+                AlertMessage().createAlert("Email not sent", this)
         }
     }
 }
