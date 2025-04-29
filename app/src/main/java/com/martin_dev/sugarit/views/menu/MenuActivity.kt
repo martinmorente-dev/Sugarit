@@ -4,9 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.card.MaterialCardView
 import com.martin_dev.sugarit.R
-import com.martin_dev.sugarit.databinding.ActivityLoginBinding
 import com.martin_dev.sugarit.databinding.ActivityMenuBinding
 import com.martin_dev.sugarit.views.food.FoodActivity
 import com.martin_dev.sugarit.views.recipie.RecipieActivity

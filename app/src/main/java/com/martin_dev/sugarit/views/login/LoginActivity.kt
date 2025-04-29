@@ -5,10 +5,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.martin_dev.sugarit.R
+import com.martin_dev.sugarit.backend.controller.login.LoginController
+import com.martin_dev.sugarit.backend.model.user.User
 import com.martin_dev.sugarit.databinding.ActivityLoginBinding
-import com.martin_dev.sugarit.views.menu.MenuActivity
-import com.martin_dev.sugarit.views.registrate.RegistrationActivity
-
+import com.martin_dev.sugarit.views.registration.RegistrationActivity
+import com.martin_dev.sugarit.views.utils.ToastManager.messageToast
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding : ActivityLoginBinding
@@ -18,6 +19,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        messageToast(this,intent.getStringExtra("toast_message") ?: "")
         init_listenners()
     }
 
@@ -32,9 +34,10 @@ class LoginActivity : AppCompatActivity() {
 
     private fun navigation(view: View)
     {
+        val user = User(binding.username.text.toString(), binding.userPasswd.text.toString())
         when(view.id)
         {
-            R.id.btn_login -> startActivity(Intent(this, MenuActivity::class.java))
+            R.id.btn_login -> LoginController(user,this).login()
             R.id.btn_registration -> startActivity(Intent(this, RegistrationActivity::class.java))
         }
     }
