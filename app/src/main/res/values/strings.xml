@@ -1,7 +1,8 @@
 <resources>
-
+    <!-- Global strings -->
     <string name="app_name">Sugarit</string>
-    <string name="fridge_question">¿Que hay en la nevera?</string>
+    <string name="btn_send">Enviar</string>
+
 
     <!-- Login -->
 
@@ -18,15 +19,16 @@
     <string name="close_excalamation">!</string>
 
     <!-- Recipe -->
-
     <string name="fridge_txt">¿Qué hay en la nevera?</string>
+    <string name="ingredient_txt">Ejemplo: Arroz, Lechuga, Tomate</string>
+
+
 
     <!-- Email Verification -->
     <string name="description_txt">Te enviamos un email de verificación por favor revisa tu bandeja de entrada</string>
     <string name="resend_email">Reenviar</string>
 
     <!-- Contexts -->
-
     <string name="img_food_context">Botón del menú para ir a la pantalla de escaneo de comida</string>
     <string name="img_recipe_context">Botón del menú para ir a la pantalla de recetas por nivel de azúcar y condimentos que tengas en al nevera</string>
     <string name="camera_context">Imagen para encender la cámara del móvil y escanear la comida</string>
