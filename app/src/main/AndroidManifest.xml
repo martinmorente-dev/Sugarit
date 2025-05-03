@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Sugarit"
         tools:targetApi="31">
+
         <activity
             android:name=".views.splashes.email.EmailVerificationActivity"
             android:exported="false" />

@@ -1,6 +1,7 @@
 package com.martin_dev.sugarit.backend.validation
 
 import android.content.Context
+import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 
 
@@ -12,7 +13,18 @@ class AlertMessage
         val message = specificMessage(reason)
         builder.setTitle("Error")
         builder.setMessage(message)
-        builder.setPositiveButton("Aceptar",null)
+        if (reason == "recipieInfo")
+        {
+            builder.setTitle("Introduce tu nivel de azúcar")
+            val input = EditText(context)
+            builder.setView(input)
+            builder.setPositiveButton("Aceptar"){dialog, which ->
+                val userInput = input.text.toString()
+                println("User input $userInput")
+            }
+        }
+        else
+            builder.setPositiveButton("Aceptar",null)
         showAlert(builder.create())
     }
 
