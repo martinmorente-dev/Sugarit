@@ -23,7 +23,6 @@
     <string name="ingredient_txt">Ejemplo: Arroz, Lechuga, Tomate</string>
 
 
-
     <!-- Email Verification -->
     <string name="description_txt">Te enviamos un email de verificación por favor revisa tu bandeja de entrada</string>
     <string name="resend_email">Reenviar</string>

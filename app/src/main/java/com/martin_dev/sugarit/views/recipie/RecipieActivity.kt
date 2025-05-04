@@ -1,10 +1,11 @@
 package com.martin_dev.sugarit.views.recipie
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.martin_dev.sugarit.backend.controller.recipie.RecipieController
 import com.martin_dev.sugarit.databinding.ActivityRecipieBinding
+import com.martin_dev.sugarit.views.recipie.recycler.RecipieResultActivity
 
 class RecipieActivity : AppCompatActivity() {
 
@@ -20,6 +21,7 @@ class RecipieActivity : AppCompatActivity() {
     fun initListeners()
     {
         binding.sendBtn.setOnClickListener {
+            startActivity(Intent(this, RecipieResultActivity::class.java))
             RecipieController().serchByIngredients(binding.userIngredients.editText?.text.toString())
         }
     }

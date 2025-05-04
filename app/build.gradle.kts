@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.utils.loadPropertyFromResources
 import java.util.Properties
 
 plugins {
@@ -5,10 +6,14 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("com.google.gms.google-services")
 }
+    val localProperties = Properties().apply {
+        load(rootProject.file("local.properties").inputStream())
+    }
 
 android {
     namespace = "com.martin_dev.sugarit"
     compileSdk = 36
+
 
     defaultConfig {
         applicationId = "com.martin_dev.sugarit"
@@ -18,8 +23,7 @@ android {
         versionName = "1.0"
                 testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        val properties = Properties()
-        properties.load(rootProject.file("local.properties").inputStream())
+        buildConfigField("String", "API_KEY", "\"${localProperties.getProperty("DEVELOPER_API_KEY")}\"")
     }
 
     buildTypes {
@@ -29,9 +33,6 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-        }
-        debug {
-            buildConfigField("String","API_KEY","\"${properties.get("DEVELOPER_API_KEY")}\"")
         }
     }
     compileOptions {
