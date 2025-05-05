@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.gradle.utils.loadPropertyFromResources
 import java.util.Properties
 
 plugins {
@@ -69,5 +68,8 @@ dependencies {
     implementation("io.coil-kt:coil:2.5.0")
     implementation("com.github.bumptech.glide:glide:5.0.0-rc01")
     kapt("com.github.bumptech.glide:compiler:5.0.0-rc01")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.7")
+
 }
 

@@ -3,6 +3,7 @@ package com.martin_dev.sugarit.backend.controller.recipie
 import android.util.Log
 import com.martin_dev.sugarit.BuildConfig
 import com.martin_dev.sugarit.backend.controller.api.spoonacular.SpoonAPIService
+import com.martin_dev.sugarit.backend.model.api.Spoonacular.RecipieResponse
 import com.martin_dev.sugarit.views.recipie.recycler.RecipieAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -13,7 +14,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RecipieController
 {
-    private lateinit var recipieAdapter : RecipieAdapter
 
     private fun getRetrofit(): Retrofit
     {
@@ -23,7 +23,7 @@ class RecipieController
             .build()
     }
 
-    fun serchByIngredients(ingredients: String,intolerances: String)
+    fun serchByIngredients(ingredients: String,intolerances: String): List<RecipieResponse>
     {
         CoroutineScope(Dispatchers.IO).launch {
             try
@@ -33,12 +33,9 @@ class RecipieController
                 Log.i("URL", response.raw().request.url.toString())
                 if (response.isSuccessful)
                 {
-                    response.body()?.results?.let { recipies ->
-                        withContext(Dispatchers.Main)
-                        {
-                            Log.i("API_RESPONSE",response.body().toString())
-                            recipieAdapter.setRecipies(recipies)
-                        }
+                    val recipies = response.body()?.results ?: emptyList()
+                    withContext(Dispatchers.Main) {
+                        return@withContext (recipies)
                     }
                 }
                 else
