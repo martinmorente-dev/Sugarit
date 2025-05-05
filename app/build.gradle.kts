@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("com.google.gms.google-services")
+    kotlin("kapt")
 }
     val localProperties = Properties().apply {
         load(rootProject.file("local.properties").inputStream())
@@ -66,5 +67,7 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("io.coil-kt:coil:2.5.0")
-
+    implementation("com.github.bumptech.glide:glide:5.0.0-rc01")
+    kapt("com.github.bumptech.glide:compiler:5.0.0-rc01")
 }
+

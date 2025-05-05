@@ -3,14 +3,18 @@ package com.martin_dev.sugarit.backend.controller.recipie
 import android.util.Log
 import com.martin_dev.sugarit.BuildConfig
 import com.martin_dev.sugarit.backend.controller.api.spoonacular.SpoonAPIService
+import com.martin_dev.sugarit.views.recipie.recycler.RecipieAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class RecipieController
 {
+    private lateinit var recipieAdapter : RecipieAdapter
+
     private fun getRetrofit(): Retrofit
     {
         return Retrofit.Builder()
@@ -19,24 +23,28 @@ class RecipieController
             .build()
     }
 
-    fun serchByIngredients(query: String)
+    fun serchByIngredients(ingredients: String,intolerances: String)
     {
         CoroutineScope(Dispatchers.IO).launch {
             try
             {
                 val response = getRetrofit().create(SpoonAPIService::class.java)
-                    .getRecipieByIngredient(query, apiKey = BuildConfig.API_KEY)
-
+                    .getRecipieByIngredient(ingredients, apiKey = BuildConfig.API_KEY, intolerances = intolerances)
+                Log.i("URL", response.raw().request.url.toString())
                 if (response.isSuccessful)
                 {
-                    val recipies = response.body()
-                    Log.i("recipiesResult", recipies.toString())
-                    Log.i("URL", "URL: ${response.raw().request.url}")
-                } else
+                    response.body()?.results?.let { recipies ->
+                        withContext(Dispatchers.Main)
+                        {
+                            Log.i("API_RESPONSE",response.body().toString())
+                            recipieAdapter.setRecipies(recipies)
+                        }
+                    }
+                }
+                else
                 {
                     val error = response.errorBody()?.string()
-                    Log.i("URL", "URL: ${response.raw().request.url}")
-                    Log.e("API_ERROR", "Código: ${response.code()}, mensaje: $error")
+                    Log.e("API_ERROR", "$error")
                 }
             }
             catch (e: Exception)

@@ -7,20 +7,19 @@ import androidx.appcompat.app.AlertDialog
 
 class AlertMessage
 {
-    fun createAlert(reason: String, context: Context)
+    fun createAlert(reason: String, context: Context, inputUser: ((String) -> (Unit))? = null)
     {
         val builder = AlertDialog.Builder(context)
         val message = specificMessage(reason)
         builder.setTitle("Error")
         builder.setMessage(message)
-        if (reason == "recipieInfo")
+        if (reason == "alergiesInfo")
         {
-            builder.setTitle("Introduce tu nivel de azúcar")
+            builder.setTitle("Introduce tus alérgenos")
             val input = EditText(context)
             builder.setView(input)
-            builder.setPositiveButton("Aceptar"){dialog, which ->
-                val userInput = input.text.toString()
-                println("User input $userInput")
+            builder.setPositiveButton("Aceptar"){_,_ ->
+                inputUser?.invoke(input.text.toString())
             }
         }
         else

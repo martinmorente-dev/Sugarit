@@ -12,6 +12,7 @@ interface SpoonAPIService
         @Query("includeIngredients") ingredients: String,
         @Query("maxSugar") maxSugar: Int = 5,
         @Query("maxCarbs") maxCarbs: Int = 30,
+        @Query("intolerances") intolerances: String,
         @Query("apiKey") apiKey: String
     ): Response<RecipieResponse>
 }
