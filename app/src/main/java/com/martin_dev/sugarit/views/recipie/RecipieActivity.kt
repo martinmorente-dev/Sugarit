@@ -3,16 +3,18 @@ package com.martin_dev.sugarit.views.recipie
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.martin_dev.sugarit.backend.controller.recipie.RecipieController
+import com.martin_dev.sugarit.backend.traductions.Translater
 import com.martin_dev.sugarit.backend.validation.AlertMessage
+import com.martin_dev.sugarit.backend.viewmodels.RecipieViewModel
 import com.martin_dev.sugarit.databinding.ActivityRecipieBinding
 import com.martin_dev.sugarit.views.recipie.recycler.RecipieResultActivity
 
 class RecipieActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRecipieBinding
-    private lateinit var alergies: String
+    private val viewModel: RecipieViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,9 +27,19 @@ class RecipieActivity : AppCompatActivity() {
     {
         binding.sendBtn.setOnClickListener {
             AlertMessage().createAlert("alergiesInfo",this) {inputUser ->
-                alergies = inputUser
-                RecipieController().serchByIngredients(binding.userIngredients.editText?.text.toString(),alergies)
-                startActivity(Intent(this, RecipieResultActivity::class.java))
+                val alergies: String = inputUser
+                var ingredients: String = binding.userIngredients.editText?.text.toString()
+                var intent = Intent(this, RecipieResultActivity::class.java)
+                Translater().translate(ingredients) { translatedText ->
+                    ingredients = translatedText.toString()
+
+                    Log.i("Ingredients Translated", ingredients)
+                    Log.i("Alergies Translated", alergies)
+
+                    intent.putExtra("ingredients", ingredients)
+                    intent.putExtra("alergies",alergies)
+                    startActivity(intent)
+                }
             }
         }
     }

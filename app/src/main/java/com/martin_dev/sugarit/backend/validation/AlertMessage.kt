@@ -3,6 +3,7 @@ package com.martin_dev.sugarit.backend.validation
 import android.content.Context
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
+import com.martin_dev.sugarit.backend.traductions.Translater
 
 
 class AlertMessage
@@ -19,7 +20,9 @@ class AlertMessage
             val input = EditText(context)
             builder.setView(input)
             builder.setPositiveButton("Aceptar"){_,_ ->
-                inputUser?.invoke(input.text.toString())
+                Translater().translate(input.text.toString()) { translatedText ->
+                    inputUser?.invoke(translatedText.toString())
+                }
             }
         }
         else

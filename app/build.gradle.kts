@@ -70,6 +70,6 @@ dependencies {
     kapt("com.github.bumptech.glide:compiler:5.0.0-rc01")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.7")
-
+    implementation("com.google.mlkit:translate:17.0.0")
 }
 
