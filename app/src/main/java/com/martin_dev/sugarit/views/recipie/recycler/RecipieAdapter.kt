@@ -4,8 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.martin_dev.sugarit.backend.model.api.Spoonacular.Recipie
+import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.Recipie
 import com.martin_dev.sugarit.databinding.ActivityItemRecipieBinding
+import kotlin.math.roundToInt
 
 class RecipieAdapter() : RecyclerView.Adapter<RecipieViewHolder>()
 {
@@ -30,7 +31,7 @@ class RecipieAdapter() : RecyclerView.Adapter<RecipieViewHolder>()
         holder.binding.title.text = recipies[position].title
         holder.binding.nutrients.text = recipies[position].nutrition.nutrients.joinToString(separator = "\n")
         {
-            "${it.name}: ${it.amount} ${it.unit}"
+            "${it.name}: ${it.amount.roundToInt()} ${it.unit}"
         }
         Glide.with(holder.binding.recipieImage.context).load(recipies[position].image).into(holder.binding.recipieImage)
     }

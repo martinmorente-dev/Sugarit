@@ -1,4 +1,4 @@
-package com.martin_dev.sugarit.backend.model.api.Spoonacular
+package com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies
 
 data class Nutrient(
     val name: String,

@@ -5,13 +5,12 @@ import com.google.mlkit.nl.translate.TranslateLanguage
 import com.google.mlkit.nl.translate.Translation
 import com.google.mlkit.nl.translate.TranslatorOptions
 
-class Translater()
+class TranslaterEnToSp
 {
-    private val options = TranslatorOptions.Builder()
-        .setSourceLanguage(TranslateLanguage.SPANISH)
-        .setTargetLanguage(TranslateLanguage.ENGLISH)
+    private var options = TranslatorOptions.Builder()
+        .setSourceLanguage(TranslateLanguage.ENGLISH)
+        .setTargetLanguage(TranslateLanguage.SPANISH)
         .build()
-
 
     private val translator = Translation.getClient(options)
 

@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.martin_dev.sugarit.backend.traductions.Translater
+import com.martin_dev.sugarit.backend.traductions.TranslaterSpToEn
 import com.martin_dev.sugarit.backend.validation.AlertMessage
 import com.martin_dev.sugarit.backend.viewmodels.RecipieViewModel
 import com.martin_dev.sugarit.databinding.ActivityRecipieBinding
@@ -30,7 +30,7 @@ class RecipieActivity : AppCompatActivity() {
                 val alergies: String = inputUser
                 var ingredients: String = binding.userIngredients.editText?.text.toString()
                 var intent = Intent(this, RecipieResultActivity::class.java)
-                Translater().translate(ingredients) { translatedText ->
+                TranslaterSpToEn().translate(ingredients) { translatedText ->
                     ingredients = translatedText.toString()
 
                     Log.i("Ingredients Translated", ingredients)
