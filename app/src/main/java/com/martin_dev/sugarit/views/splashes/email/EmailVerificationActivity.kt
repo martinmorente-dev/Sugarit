@@ -22,7 +22,7 @@ class EmailVerificationActivity : AppCompatActivity() {
     private lateinit var email: String
     private lateinit var password: String
 
-    private val VERIFICATION_TIMEOUT = 86400000L // 24 hours in milliseconds
+    private val VERIFICATION_TIMEOUT = 120000L // 2 min  in milliseconds
     private val CHECK_INTERVAL = 3000L // 3 seconds interval for checking email verification
 
     override fun onCreate(savedInstanceState: Bundle?) {
