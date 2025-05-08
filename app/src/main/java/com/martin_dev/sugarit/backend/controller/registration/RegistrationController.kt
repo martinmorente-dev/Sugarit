@@ -23,10 +23,9 @@ class RegistrationController()
 
     fun registration()
     {
-        val validator = LoginRegistrationValidation().validation(this.user.email, this.user.password, this.context)
         auth = FirebaseAuth.getInstance()
 
-        if (validator && !isRegistered(this.user.email.toString(),this.user.password.toString()))
+        if (!isRegistered(this.user.email.toString(),this.user.password.toString()))
         {
             auth.createUserWithEmailAndPassword(this.user.email.toString(), this.user.password.toString()).addOnCompleteListener {
                     if(it.isSuccessful) {

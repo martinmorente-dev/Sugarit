@@ -4,6 +4,7 @@ import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.RecipieResp
 import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.RecipieUrl
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface SpoonAPIService
@@ -19,7 +20,7 @@ interface SpoonAPIService
 
     @GET("recipes/{id}/information")
     suspend fun getRecipeURLByid(
-        @Query("id") recipeId: Int,
+        @Path("id") recipeId: Int,
         @Query("apiKey") apiKey: String
     ): Response<RecipieUrl>
 }

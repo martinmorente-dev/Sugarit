@@ -8,7 +8,7 @@ import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.Recipie
 import com.martin_dev.sugarit.databinding.ActivityItemRecipieBinding
 import kotlin.math.roundToInt
 
-class RecipieAdapter() : RecyclerView.Adapter<RecipieViewHolder>()
+class RecipieAdapter(private val onItemClick: (Recipie) -> Unit) : RecyclerView.Adapter<RecipieViewHolder>()
 {
 
     private val recipies = mutableListOf<Recipie>()
@@ -34,6 +34,9 @@ class RecipieAdapter() : RecyclerView.Adapter<RecipieViewHolder>()
             "${it.name}: ${it.amount.roundToInt()} ${it.unit}"
         }
         Glide.with(holder.binding.recipieImage.context).load(recipies[position].image).into(holder.binding.recipieImage)
+        holder.binding.root.setOnClickListener {
+            onItemClick(recipies[position])
+        }
     }
 
     override fun getItemCount(): Int = recipies.size

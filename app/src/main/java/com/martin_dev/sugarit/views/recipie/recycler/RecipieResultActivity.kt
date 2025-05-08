@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.martin_dev.sugarit.backend.validation.AlertMessage
 import com.martin_dev.sugarit.backend.viewmodels.RecipieViewModel
 import com.martin_dev.sugarit.databinding.ActivityRecipieResultBinding
+import com.martin_dev.sugarit.views.recipie.RecipieInstrucctions
 
 class RecipieResultActivity() : AppCompatActivity()
 {
@@ -20,23 +21,37 @@ class RecipieResultActivity() : AppCompatActivity()
         super.onCreate(savedInstanceState)
         binding = ActivityRecipieResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        innitRecycler()
+        observeRecycler()
+        searchRecipies()
+    }
 
-        adapter = RecipieAdapter()
+    fun innitRecycler()
+    {
+        adapter = RecipieAdapter { recipie ->
+            Log.i("RecipieID","${recipie.id}")
+            Log.i("ID_RecipieResultActivity","${ recipie.id }")
+            RecipieInstrucctions(this,this).searchRecipieUrl(recipie.id)
+        }
         binding.listResults.layoutManager = LinearLayoutManager(this)
         binding.listResults.adapter = adapter
+    }
 
-        val ingredients = intent.getStringExtra("ingredients") ?: ""
-        val alergies = intent.getStringExtra("alergies") ?: ""
-
-        viewModel.searchByIngredients(ingredients, alergies)
-
-        // Observe the LiveData and update the adapter
+    fun observeRecycler()
+    {
         viewModel.recipies.observe(this) { recipies ->
             if (recipies.isEmpty()) {
                 AlertMessage().createAlert("No results found", this)
-                Log.i("RecipieResultActivity AA", "No results found")
+                Log.i("RecipieResultActivity", "No results found")
             }
             adapter.setRecipies(recipies)
         }
+    }
+
+    fun searchRecipies()
+    {
+        val ingredients = intent.getStringExtra("ingredients") ?: ""
+        val alergies = intent.getStringExtra("alergies") ?: ""
+        viewModel.searchByIngredients(ingredients, alergies)
     }
 }

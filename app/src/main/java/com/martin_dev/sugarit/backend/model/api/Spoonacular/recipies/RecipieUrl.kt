@@ -1,5 +1,8 @@
 package com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies
 
+import com.google.gson.annotations.SerializedName
+
 data class RecipieUrl(
-    val url: String
+    @SerializedName("sourceUrl")
+    val url: String?
 )
