@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="268dp"
             android:layout_height="match_parent"
             android:gravity="center|top"
             android:orientation="vertical"
@@ -31,21 +31,27 @@
                 android:layout_height="60dp"
                 android:src="@drawable/user" />
 
-            <EditText
-                android:id="@+id/username"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/username"
-                android:inputType="text"
-                android:maxLines="1" />
+                <EditText
+                    android:id="@+id/username"
+                    android:hint="@string/username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:textColor="@android:color/black" />
 
-            <EditText
-                android:id="@+id/user_passwd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/user_passowrd"
-                android:inputType="textPassword"
-                android:maxLines="1" />
+
+                <EditText
+                    android:id="@+id/user_passwd"
+                    android:hint="@string/user_passowrd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|bottom"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:textColor="@android:color/black"/>
+
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -57,11 +63,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
                     android:backgroundTint="@color/background_btn"
                     android:text="@string/entry"
                     android:textColor="@color/text_color"
-                    app:cornerRadius="20dp"
-                    android:layout_marginEnd="10dp" />
+                    app:cornerRadius="20dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_registration"

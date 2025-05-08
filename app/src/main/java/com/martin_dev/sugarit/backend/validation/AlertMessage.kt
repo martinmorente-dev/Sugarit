@@ -1,18 +1,32 @@
 package com.martin_dev.sugarit.backend.validation
 
 import android.content.Context
+import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
+import com.martin_dev.sugarit.backend.traductions.TranslaterSpToEn
 
 
 class AlertMessage
 {
-    fun createAlert(reason: String, context: Context)
+    fun createAlert(reason: String, context: Context, inputUser: ((String) -> (Unit))? = null)
     {
         val builder = AlertDialog.Builder(context)
         val message = specificMessage(reason)
         builder.setTitle("Error")
         builder.setMessage(message)
-        builder.setPositiveButton("Aceptar",null)
+        if (reason == "alergiesInfo")
+        {
+            builder.setTitle("Introduce tus alérgenos")
+            val input = EditText(context)
+            builder.setView(input)
+            builder.setPositiveButton("Aceptar"){_,_ ->
+                TranslaterSpToEn().translate(input.text.toString()) { translatedText ->
+                    inputUser?.invoke(translatedText.toString())
+                }
+            }
+        }
+        else
+            builder.setPositiveButton("Aceptar",null)
         showAlert(builder.create())
     }
 
@@ -31,6 +45,7 @@ class AlertMessage
             "Malformed password Digit" -> message = "La contraseña debe tener al menos un digito"
             "Malformed password Special Char" -> message = "La contraseña tiene que tener caracteres especiales"
             "Email not sended" -> message = "Ahora mismo no se pudo enviar el correo de verificación inténtelo más tarde"
+            "No url found" -> message = "La receta que busca no está disponible en este momento"
         }
         return(message)
     }
