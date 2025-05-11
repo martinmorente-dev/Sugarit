@@ -4,16 +4,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.Recipie
+import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.RecipieSponnacular
 import com.martin_dev.sugarit.databinding.ActivityItemRecipieBinding
 import kotlin.math.roundToInt
 
-class RecipieAdapter(private val onItemClick: (Recipie) -> Unit) : RecyclerView.Adapter<RecipieViewHolder>()
+class RecipieAdapter(private val onItemClick: (RecipieSponnacular) -> Unit, private val onSaveClick: (RecipieSponnacular) -> Unit) : RecyclerView.Adapter<RecipieViewHolder>()
 {
 
-    private val recipies = mutableListOf<Recipie>()
+    private val recipies = mutableListOf<RecipieSponnacular>()
 
-    fun setRecipies(newRecipies: List<Recipie>)
+    fun setRecipies(newRecipies: List<RecipieSponnacular>)
     {
         recipies.clear()
         recipies.addAll(newRecipies)
@@ -36,6 +36,9 @@ class RecipieAdapter(private val onItemClick: (Recipie) -> Unit) : RecyclerView.
         Glide.with(holder.binding.recipieImage.context).load(recipies[position].image).into(holder.binding.recipieImage)
         holder.binding.root.setOnClickListener {
             onItemClick(recipies[position])
+        }
+        holder.binding.saveRecipeBtn.setOnClickListener {
+            onSaveClick(recipies[position])
         }
     }
 

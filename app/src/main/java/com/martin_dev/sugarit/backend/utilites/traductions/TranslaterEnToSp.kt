@@ -1,17 +1,16 @@
-package com.martin_dev.sugarit.backend.traductions
+package com.martin_dev.sugarit.backend.utilites.traductions
 
 import android.util.Log
 import com.google.mlkit.nl.translate.TranslateLanguage
 import com.google.mlkit.nl.translate.Translation
 import com.google.mlkit.nl.translate.TranslatorOptions
 
-class TranslaterSpToEn()
+class TranslaterEnToSp
 {
-    private val options = TranslatorOptions.Builder()
-        .setSourceLanguage(TranslateLanguage.SPANISH)
-        .setTargetLanguage(TranslateLanguage.ENGLISH)
+    private var options = TranslatorOptions.Builder()
+        .setSourceLanguage(TranslateLanguage.ENGLISH)
+        .setTargetLanguage(TranslateLanguage.SPANISH)
         .build()
-
 
     private val translator = Translation.getClient(options)
 

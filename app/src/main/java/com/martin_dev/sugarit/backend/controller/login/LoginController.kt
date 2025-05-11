@@ -2,8 +2,7 @@ package com.martin_dev.sugarit.backend.controller.login
 
 import android.content.Context
 import com.google.firebase.auth.FirebaseAuth
-import com.martin_dev.sugarit.backend.model.user.User
-import com.martin_dev.sugarit.backend.validation.login_password.LoginRegistrationValidation
+import com.martin_dev.sugarit.backend.utilites.user.UserBasics
 import com.martin_dev.sugarit.views.components.toast.ToastComponent
 import com.martin_dev.sugarit.views.menu.MenuActivity
 import com.martin_dev.sugarit.views.registration.RegistrationActivity
@@ -12,17 +11,17 @@ class LoginController()
 {
 
     private lateinit var context: Context
-    private lateinit var user: User
+    private lateinit var userBasics: UserBasics
 
-    constructor(user: User,context: Context) : this()
+    constructor(userBasics: UserBasics, context: Context) : this()
     {
-        this.user=user
+        this.userBasics=userBasics
         this.context=context
     }
 
     fun login()
     {
-        FirebaseAuth.getInstance().signInWithEmailAndPassword(user.email,user.password).addOnCompleteListener {
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(userBasics.email,userBasics.password).addOnCompleteListener {
             if(it.isSuccessful)
                 ToastComponent().navigationToActivity(MenuActivity::class.java,"Welcome",this.context)
             else

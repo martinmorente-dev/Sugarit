@@ -6,7 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.martin_dev.sugarit.R
 import com.martin_dev.sugarit.backend.controller.login.LoginController
-import com.martin_dev.sugarit.backend.model.user.User
+import com.martin_dev.sugarit.backend.utilites.user.UserBasics
 import com.martin_dev.sugarit.databinding.ActivityLoginBinding
 import com.martin_dev.sugarit.views.registration.RegistrationActivity
 import com.martin_dev.sugarit.views.utils.ToastManager.messageToast
@@ -34,10 +34,10 @@ class LoginActivity : AppCompatActivity() {
 
     private fun navigation(view: View)
     {
-        val user = User(binding.username.text.toString(), binding.userPasswd.text.toString())
+        val userBasics = UserBasics(binding.username.text.toString(), binding.userPasswd.text.toString())
         when(view.id)
         {
-            R.id.btn_login -> LoginController(user,this).login()
+            R.id.btn_login -> LoginController(userBasics,this).login()
             R.id.btn_registration -> startActivity(Intent(this, RegistrationActivity::class.java))
         }
     }

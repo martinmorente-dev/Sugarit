@@ -7,7 +7,9 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.google.firebase.auth.FirebaseAuth
-import com.martin_dev.sugarit.backend.validation.AlertMessage
+import com.google.firebase.database.FirebaseDatabase
+import com.martin_dev.sugarit.backend.model.firebase.User
+import com.martin_dev.sugarit.backend.utilites.validation.AlertMessage
 import com.martin_dev.sugarit.databinding.ActivityEmailVerificationBinding
 import com.martin_dev.sugarit.views.login.LoginActivity
 import com.martin_dev.sugarit.views.menu.MenuActivity
@@ -49,6 +51,9 @@ class EmailVerificationActivity : AppCompatActivity() {
                     if (it.isSuccessful) {
                         if (auth.currentUser?.isEmailVerified == true) {
                             startActivity(Intent(this@EmailVerificationActivity, MenuActivity::class.java))
+                            val userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
+                            val user = User(id = userId, email = email)
+                            FirebaseDatabase.getInstance().getReference("users").child(userId).setValue(user)
                             finish()
                             return@addOnCompleteListener
                         }

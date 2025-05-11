@@ -6,34 +6,25 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.martin_dev.sugarit.BuildConfig
-import com.martin_dev.sugarit.backend.controller.api.spoonacular.SpoonAPIService
 import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.Nutrient
-import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.Recipie
+import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.RecipieSponnacular
 import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.RecipieResponse
-import com.martin_dev.sugarit.backend.traductions.TranslaterEnToSp
-import com.martin_dev.sugarit.backend.validation.AlertMessage
+import com.martin_dev.sugarit.backend.utilites.traductions.TranslaterEnToSp
 import kotlinx.coroutines.launch
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import com.martin_dev.sugarit.backend.utilites.retrofit.Retrofit
 
 class RecipieViewModel: ViewModel()
 {
 
-    private val _recipies = MutableLiveData<List<Recipie>>()
-    val recipies: LiveData<List<Recipie>> = _recipies
-
-
-    private val retrofit = Retrofit.Builder()
-        .baseUrl("https://api.spoonacular.com/")
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
+    private val _recipies = MutableLiveData<List<RecipieSponnacular>>()
+    val recipies: LiveData<List<RecipieSponnacular>> = _recipies
 
     fun searchByIngredients(ingredients: String, alergies: String)
     {
         viewModelScope.launch {
             try
             {
-                val response = retrofit.create(SpoonAPIService::class.java).getRecipieByIngredient(ingredients, apiKey = BuildConfig.API_KEY, intolerances = alergies)
+                val response = Retrofit.api.getRecipieByIngredient(ingredients, apiKey = BuildConfig.API_KEY, intolerances = alergies)
                 if (response.isSuccessful)
                 {
                     val body = response.body()
@@ -61,7 +52,7 @@ class RecipieViewModel: ViewModel()
     fun translatedList(apiResults: List<RecipieResponse>, onAllTranslated: (List<RecipieResponse>) -> Unit) {
 
         val translater = TranslaterEnToSp()
-        val translatedRecipes = mutableListOf<Recipie>()
+        val translatedRecipes = mutableListOf<RecipieSponnacular>()
         val allRecipes = apiResults.flatMap { it.results }
         var completedRecipes = 0
 

@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.martin_dev.sugarit.backend.traductions.TranslaterSpToEn
-import com.martin_dev.sugarit.backend.validation.AlertMessage
+import com.martin_dev.sugarit.backend.utilites.traductions.TranslaterSpToEn
+import com.martin_dev.sugarit.backend.utilites.validation.AlertMessage
 import com.martin_dev.sugarit.backend.viewmodels.RecipieViewModel
 import com.martin_dev.sugarit.databinding.ActivityRecipieBinding
 import com.martin_dev.sugarit.views.recipie.recycler.RecipieResultActivity
