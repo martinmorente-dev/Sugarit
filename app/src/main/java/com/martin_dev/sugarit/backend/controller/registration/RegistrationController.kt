@@ -3,21 +3,20 @@ package com.martin_dev.sugarit.backend.controller.registration
 import android.content.Context
 import android.content.Intent
 import com.google.firebase.auth.FirebaseAuth
-import com.martin_dev.sugarit.backend.model.user.User
-import com.martin_dev.sugarit.backend.validation.AlertMessage
-import com.martin_dev.sugarit.backend.validation.login_password.LoginRegistrationValidation
+import com.martin_dev.sugarit.backend.utilites.user.UserBasics
+import com.martin_dev.sugarit.backend.utilites.validation.AlertMessage
 import com.martin_dev.sugarit.views.components.toast.ToastComponent
 import com.martin_dev.sugarit.views.login.LoginActivity
 import com.martin_dev.sugarit.views.splashes.email.EmailVerificationActivity
 
 class RegistrationController()
 {
-    private lateinit var user: User
+    private lateinit var userBasics: UserBasics
     private lateinit var context: Context
     private lateinit var auth: FirebaseAuth
 
-    constructor(user: User, context: Context) : this() {
-        this.user = user
+    constructor(userBasics: UserBasics, context: Context) : this() {
+        this.userBasics = userBasics
         this.context = context
     }
 
@@ -25,9 +24,9 @@ class RegistrationController()
     {
         auth = FirebaseAuth.getInstance()
 
-        if (!isRegistered(this.user.email.toString(),this.user.password.toString()))
+        if (!isRegistered(this.userBasics.email.toString(),this.userBasics.password.toString()))
         {
-            auth.createUserWithEmailAndPassword(this.user.email.toString(), this.user.password.toString()).addOnCompleteListener {
+            auth.createUserWithEmailAndPassword(this.userBasics.email.toString(), this.userBasics.password.toString()).addOnCompleteListener {
                     if(it.isSuccessful) {
                         val actualUser = auth.currentUser
                         actualUser?.sendEmailVerification()?.addOnCompleteListener { verifyTask ->
@@ -35,8 +34,8 @@ class RegistrationController()
                             {
                                 val intent = Intent(this.context, EmailVerificationActivity::class.java)
                                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                                intent.putExtra("email",this.user.email)
-                                intent.putExtra("password",this.user.password)
+                                intent.putExtra("email",this.userBasics.email)
+                                intent.putExtra("password",this.userBasics.password)
                                 intent.putExtra("message_toast","Se te envió un email de confirmación de correo electrónico")
                                 this.context.startActivity(intent)
                                 auth.signOut()

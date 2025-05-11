@@ -1,8 +1,8 @@
-package com.martin_dev.sugarit.backend.validation.login_password
+package com.martin_dev.sugarit.backend.utilites.validation.login_password
 
 import android.content.Context
 import android.util.Patterns
-import com.martin_dev.sugarit.backend.validation.AlertMessage
+import com.martin_dev.sugarit.backend.utilites.validation.AlertMessage
 
 class LoginRegistrationValidation
 {

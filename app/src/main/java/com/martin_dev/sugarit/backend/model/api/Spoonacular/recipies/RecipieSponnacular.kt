@@ -1,6 +1,6 @@
 package com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies
 
-data class Recipie(
+data class RecipieSponnacular(
     val id: Int,
     val title: String,
     val image: String,

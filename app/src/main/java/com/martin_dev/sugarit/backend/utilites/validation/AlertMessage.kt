@@ -1,9 +1,9 @@
-package com.martin_dev.sugarit.backend.validation
+package com.martin_dev.sugarit.backend.utilites.validation
 
 import android.content.Context
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
-import com.martin_dev.sugarit.backend.traductions.TranslaterSpToEn
+import com.martin_dev.sugarit.backend.utilites.traductions.TranslaterSpToEn
 
 
 class AlertMessage
