@@ -1,6 +1,6 @@
 package com.martin_dev.sugarit.views.recipie.recycler.recipie_saved
 
-import android.util.Log
+import android.annotation.SuppressLint
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.RecipieSponnacular
@@ -13,12 +13,12 @@ class RecipieUserViewHolder(
     private val onItemClick: (RecipieSponnacular) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
+    @SuppressLint("SetTextI18n")
     fun bind(recipe: RecipieSponnacular) {
         binding.title.text = recipe.title
         Glide.with(binding.recipieImage.context).load(recipe.image).into(binding.recipieImage)
 
         val carbs = recipe.nutrition.nutrients.find {
-            Log.i("RecipieUserViewHolder", "name: ${it.name}")
             it.name.equals("Carbohydrates", ignoreCase = true) ||
                     it.name.equals("Carbohidratos netos", ignoreCase = true) ||
                     it.name.equals("Carbohidratos", ignoreCase = true)
