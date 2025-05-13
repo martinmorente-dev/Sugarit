@@ -10,6 +10,7 @@
     <color name="blur">#45FFFFFF</color>
     <color name="none">#00FFFFFF</color>
 
+    <!-- App -->
     <color name="background_app">#CBFD75</color>
     <color name="background_component">#cdf9ca</color>
     <color name="background_btn">#aeffa4</color>
