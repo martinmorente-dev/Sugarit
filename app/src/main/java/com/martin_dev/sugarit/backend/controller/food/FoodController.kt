@@ -1,13 +1,17 @@
-package com.martin_dev.sugarit.backend.controller.camera
+package com.martin_dev.sugarit.backend.controller.food
 
 import androidx.activity.result.ActivityResultLauncher
 import android.Manifest
 import android.content.Intent
+import android.graphics.Bitmap
 import android.provider.MediaStore
-import android.util.Log
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import com.martin_dev.sugarit.backend.controller.mlkit.ImageDetectorController
 import com.martin_dev.sugarit.backend.utilites.validation.AlertMessage
+import com.martin_dev.sugarit.views.food.FoodActivity
 
 
 class FoodController(private val activity: AppCompatActivity)
@@ -26,7 +30,14 @@ class FoodController(private val activity: AppCompatActivity)
 
         cameraLauncher = activity.registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             val data = result.data
-            Log.i("data image", data?.extras.toString())
+            val extras = data?.extras
+            val bitmap = extras?.get("data") as? Bitmap
+            if(bitmap != null) {
+                ImageDetectorController(bitmap, activity).recognizeFood()
+                (activity as? FoodActivity)?.onPhotoTaken()
+            }
+            else
+                Toast.makeText(activity, "No se pudo obtener la imagen", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -39,8 +50,10 @@ class FoodController(private val activity: AppCompatActivity)
     {
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
-        if (takePictureIntent.resolveActivity(activity.packageManager) != null)
+        if (takePictureIntent.resolveActivity(activity.packageManager) != null) {
             cameraLauncher.launch(takePictureIntent)
+        }
+        else
+            Toast.makeText(activity, "Unable to open camera", Toast.LENGTH_SHORT).show()
     }
-
 }

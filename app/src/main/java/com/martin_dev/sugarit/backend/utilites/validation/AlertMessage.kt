@@ -46,6 +46,7 @@ class AlertMessage
             "Malformed password Special Char" -> message = "La contraseña tiene que tener caracteres especiales"
             "Email not sended" -> message = "Ahora mismo no se pudo enviar el correo de verificación inténtelo más tarde"
             "No url found" -> message = "La receta que busca no está disponible en este momento"
+            "No food detected" -> message = "No se ha detectado ningún alimento en la foto"
         }
         return(message)
     }

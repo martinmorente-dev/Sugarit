@@ -1,6 +1,7 @@
 package com.martin_dev.sugarit.backend.controller.api.spoonacular
 
 import com.martin_dev.sugarit.BuildConfig
+import com.martin_dev.sugarit.backend.model.api.Spoonacular.food.Food
 import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.RecipieResponse
 import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.RecipieSponnacular
 import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.RecipieUrl
@@ -32,4 +33,18 @@ interface SpoonAPIService
         @Query("apiKey") apiKey: String = BuildConfig.API_KEY,
         @Query("includeNutrition") includeNutrition: Boolean = true
     ): Response<List<RecipieSponnacular>>
+
+    @GET("food/ingredients/search")
+    suspend fun getFood(
+        @Query("query") food: String,
+        @Query("apiKey") apiKey: String = BuildConfig.API_KEY,
+    ):Response<Food>
+
+    @GET("food/ingredients/{id}/information")
+    suspend fun getFoodNutrition(
+        @Path("id") foodId: Int,
+        @Query("amount") amount: Int = 1,
+        @Query("unit") unit: String = "medium",
+        @Query("apiKey") apiKey: String = BuildConfig.API_KEY
+    )
 }
