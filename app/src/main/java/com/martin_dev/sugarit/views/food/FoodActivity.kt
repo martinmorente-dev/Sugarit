@@ -1,5 +1,6 @@
 package com.martin_dev.sugarit.views.food
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -40,6 +41,7 @@ class FoodActivity : AppCompatActivity() {
                     Log.i("Food Type", foodType)
                     alertPrompt.createAlertPrompt("Food quantity", this) { foodQuantity ->
                         Log.i("Food Quantity", foodQuantity)
+                        startActivity(Intent(this, ItemCameraResultActivity::class.java))
                     }
                 }
             }

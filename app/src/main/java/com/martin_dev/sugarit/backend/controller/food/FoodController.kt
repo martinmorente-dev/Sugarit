@@ -8,10 +8,8 @@ import android.provider.MediaStore
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
 import com.martin_dev.sugarit.backend.controller.mlkit.ImageDetectorController
 import com.martin_dev.sugarit.backend.utilites.validation.AlertMessage
-import com.martin_dev.sugarit.views.food.FoodActivity
 
 
 class FoodController(private val activity: AppCompatActivity)

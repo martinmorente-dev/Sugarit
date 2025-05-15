@@ -2,6 +2,7 @@ package com.martin_dev.sugarit.backend.controller.api.spoonacular
 
 import com.martin_dev.sugarit.BuildConfig
 import com.martin_dev.sugarit.backend.model.api.Spoonacular.food.Food
+import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.Nutrition
 import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.RecipieResponse
 import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.RecipieSponnacular
 import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.RecipieUrl
@@ -43,8 +44,8 @@ interface SpoonAPIService
     @GET("food/ingredients/{id}/information")
     suspend fun getFoodNutrition(
         @Path("id") foodId: Int,
-        @Query("amount") amount: Int = 1,
+        @Query("amount") amount: Int,
         @Query("unit") unit: String = "medium",
         @Query("apiKey") apiKey: String = BuildConfig.API_KEY
-    )
+    ): Response<Nutrition>
 }

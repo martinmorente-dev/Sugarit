@@ -31,12 +31,22 @@
                 android:padding="8dp" />
 
             <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:padding="10dp"
+                />
+
+            <TextView
                 android:id="@+id/nutrients"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
                 android:layout_gravity="bottom"
-                android:padding="10dp"/>
+                android:padding="10dp"
+                android:textColor="@color/black"
+                />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

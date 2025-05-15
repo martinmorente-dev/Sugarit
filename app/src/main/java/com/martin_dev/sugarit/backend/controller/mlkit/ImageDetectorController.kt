@@ -1,17 +1,22 @@
 package com.martin_dev.sugarit.backend.controller.mlkit
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
-import android.util.Log
+import android.net.Uri
+import androidx.core.content.FileProvider
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.objects.ObjectDetection
 import com.google.mlkit.vision.objects.defaults.ObjectDetectorOptions
 import com.martin_dev.sugarit.backend.utilites.validation.AlertMessage
 import com.martin_dev.sugarit.views.food.FoodActivity
+import com.martin_dev.sugarit.views.food.ItemCameraResultActivity
+import java.io.File
 
-
-class ImageDetectorController(var imageSended: Bitmap, var context: Context)
-{
+class ImageDetectorController(
+    private val imageSended: Bitmap,
+    private val context: Context
+) {
     private val image = InputImage.fromBitmap(imageSended, 0)
 
     private val options = ObjectDetectorOptions.Builder()
@@ -21,32 +26,47 @@ class ImageDetectorController(var imageSended: Bitmap, var context: Context)
 
     private val objectDetector = ObjectDetection.getClient(options)
 
-    fun recognizeFood()
-    {
+    fun recognizeFood() {
         objectDetector.process(image).addOnSuccessListener { detectedObjects ->
-            if(detectedObjects.isEmpty())
-            {
+            if (detectedObjects.isEmpty()) {
                 AlertMessage().createAlert("Image not detected", context)
                 return@addOnSuccessListener
             }
-            for (detectedObject in detectedObjects)
-            {
-                if(detectedObject.labels.isNotEmpty())
-                {
+            for (detectedObject in detectedObjects) {
+                if (detectedObject.labels.isNotEmpty()) {
                     val label = detectedObject.labels.first()
-                    if(label.text == "Food")
-                    {
+                    if (label.text == "Food") {
                         val confidence = label.confidence
-                        if (confidence > 0.7f)
-                            (context as? FoodActivity)?.onPhotoTaken()
-                    }
-                    else
+                        if (confidence > 0.7f) {
+                            val imageUri = saveBitmapToCache()
+                            val intent = Intent(context, ItemCameraResultActivity::class.java).apply {
+                                putExtra("imageUri", imageUri)
+                                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                            }
+                            (context as? FoodActivity)?.let { activity ->
+                                activity.onPhotoTaken()
+                                activity.startActivity(intent)
+                            }
+                        }
+                    } else {
                         AlertMessage().createAlert("No food detected", context)
-                }
-                else
+                    }
+                } else {
                     AlertMessage().createAlert("Image not detected", context)
-
+                }
             }
         }
+    }
+
+    private fun saveBitmapToCache(): Uri {
+        val cachePath = File(context.cacheDir, "images")
+        cachePath.mkdirs()
+        val file = File(cachePath, "image.jpg")
+        val stream = file.outputStream()
+        imageSended.compress(Bitmap.CompressFormat.JPEG, 90, stream)
+        stream.close()
+        return FileProvider.getUriForFile(
+            context,
+            "${context.packageName}.fileprovider", file)
     }
 }
