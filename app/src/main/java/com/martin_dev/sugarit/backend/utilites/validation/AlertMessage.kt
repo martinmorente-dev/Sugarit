@@ -47,6 +47,8 @@ class AlertMessage
             "Email not sended" -> message = "Ahora mismo no se pudo enviar el correo de verificación inténtelo más tarde"
             "No url found" -> message = "La receta que busca no está disponible en este momento"
             "No food detected" -> message = "No se ha detectado ningún alimento en la foto"
+            "Wrong answer" -> message = "Tienes que introducir si la foto es una comida o receta"
+            "Image not detected" -> message = "No se detecto ningun alimento o receta por favor asegurese que la foto es la deseada"
         }
         return(message)
     }

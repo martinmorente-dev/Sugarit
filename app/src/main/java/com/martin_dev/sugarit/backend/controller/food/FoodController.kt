@@ -34,7 +34,6 @@ class FoodController(private val activity: AppCompatActivity)
             val bitmap = extras?.get("data") as? Bitmap
             if(bitmap != null) {
                 ImageDetectorController(bitmap, activity).recognizeFood()
-                (activity as? FoodActivity)?.onPhotoTaken()
             }
             else
                 Toast.makeText(activity, "No se pudo obtener la imagen", Toast.LENGTH_SHORT).show()

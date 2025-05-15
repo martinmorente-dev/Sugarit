@@ -7,6 +7,7 @@ import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.objects.ObjectDetection
 import com.google.mlkit.vision.objects.defaults.ObjectDetectorOptions
 import com.martin_dev.sugarit.backend.utilites.validation.AlertMessage
+import com.martin_dev.sugarit.views.food.FoodActivity
 
 
 class ImageDetectorController(var imageSended: Bitmap, var context: Context)
@@ -23,6 +24,11 @@ class ImageDetectorController(var imageSended: Bitmap, var context: Context)
     fun recognizeFood()
     {
         objectDetector.process(image).addOnSuccessListener { detectedObjects ->
+            if(detectedObjects.isEmpty())
+            {
+                AlertMessage().createAlert("Image not detected", context)
+                return@addOnSuccessListener
+            }
             for (detectedObject in detectedObjects)
             {
                 if(detectedObject.labels.isNotEmpty())
@@ -32,11 +38,14 @@ class ImageDetectorController(var imageSended: Bitmap, var context: Context)
                     {
                         val confidence = label.confidence
                         if (confidence > 0.7f)
-                            Log.i("Food Coincidence", "Food detected with confidence: $confidence")
+                            (context as? FoodActivity)?.onPhotoTaken()
                     }
                     else
                         AlertMessage().createAlert("No food detected", context)
                 }
+                else
+                    AlertMessage().createAlert("Image not detected", context)
+
             }
         }
     }

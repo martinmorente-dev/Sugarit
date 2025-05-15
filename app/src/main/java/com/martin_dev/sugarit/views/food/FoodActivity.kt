@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.martin_dev.sugarit.backend.controller.food.FoodController
 import com.martin_dev.sugarit.backend.utilites.alert_prompt.AlertPrompt
+import com.martin_dev.sugarit.backend.utilites.validation.AlertMessage
 import com.martin_dev.sugarit.databinding.ActivityFoodBinding
 
 class FoodActivity : AppCompatActivity() {
@@ -31,11 +32,19 @@ class FoodActivity : AppCompatActivity() {
     }
 
     fun onPhotoTaken() {
-        alertPrompt.createAlertPrompt("Food type", this) { foodType ->
-            Log.i("Food Type", foodType)
-            alertPrompt.createAlertPrompt("Food quantity", this) { foodQuantity ->
-                Log.i("Food Quantity", foodQuantity)
+        alertPrompt.createAlertPrompt("Recipie or Food", this) { foodOrRecipie ->
+            Log.i("Food or Recipe",foodOrRecipie)
+            if(foodOrRecipie == "") AlertMessage().createAlert("Wrong answer", this)
+            if(foodOrRecipie == "meal") {
+                alertPrompt.createAlertPrompt("Food type", this) { foodType ->
+                    Log.i("Food Type", foodType)
+                    alertPrompt.createAlertPrompt("Food quantity", this) { foodQuantity ->
+                        Log.i("Food Quantity", foodQuantity)
+                    }
+                }
             }
+            else
+                Log.i("Recipie", foodOrRecipie)
         }
     }
 }

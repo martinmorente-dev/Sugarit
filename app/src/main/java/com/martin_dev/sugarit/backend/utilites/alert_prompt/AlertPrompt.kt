@@ -32,6 +32,7 @@ class AlertPrompt()
         when (reason) {
             "Food type" -> hint = "Ejemplo: Limon"
             "Food quantity" -> hint = "Ejemplo: 2"
+            "Food or recipe" -> hint = "Ejemplo: comida o receta"
         }
         return (hint)
     }
@@ -42,6 +43,7 @@ class AlertPrompt()
         when (reason) {
             "Food type" -> title = "Introduce que tipo de comida es la foto"
             "Food quantity" -> title = "Introduce la cantidad de alimentos que hay en la foto"
+            "Recipie or Food" -> title = "¿Es una comida o receta lo que hay en la foto?"
         }
         return (title)
     }
