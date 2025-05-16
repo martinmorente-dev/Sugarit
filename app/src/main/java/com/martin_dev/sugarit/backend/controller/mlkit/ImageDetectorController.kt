@@ -10,7 +10,6 @@ import com.google.mlkit.vision.objects.ObjectDetection
 import com.google.mlkit.vision.objects.defaults.ObjectDetectorOptions
 import com.martin_dev.sugarit.backend.utilites.validation.AlertMessage
 import com.martin_dev.sugarit.views.food.FoodActivity
-import com.martin_dev.sugarit.views.food.ItemCameraResultActivity
 import java.io.File
 
 class ImageDetectorController(
@@ -38,14 +37,9 @@ class ImageDetectorController(
                     if (label.text == "Food") {
                         val confidence = label.confidence
                         if (confidence > 0.7f) {
-                            val imageUri = saveBitmapToCache()
-                            val intent = Intent(context, ItemCameraResultActivity::class.java).apply {
-                                putExtra("imageUri", imageUri)
-                                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                            }
+                            saveBitmapToCache()
                             (context as? FoodActivity)?.let { activity ->
                                 activity.onPhotoTaken()
-                                activity.startActivity(intent)
                             }
                         }
                     } else {

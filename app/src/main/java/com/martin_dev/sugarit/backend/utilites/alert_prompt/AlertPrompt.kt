@@ -28,7 +28,7 @@ class AlertPrompt()
 
 
     private fun specificHint(reason: String): String {
-        var hint: String = ""
+        var hint = ""
         when (reason) {
             "Food type" -> hint = "Ejemplo: Limon"
             "Food quantity" -> hint = "Ejemplo: 2"
@@ -43,7 +43,7 @@ class AlertPrompt()
         when (reason) {
             "Food type" -> title = "Introduce que tipo de comida es la foto"
             "Food quantity" -> title = "Introduce la cantidad de alimentos que hay en la foto"
-            "Recipie or Food" -> title = "¿Es una comida o receta lo que hay en la foto?"
+            "Recipe or Food" -> title = "¿Es una comida o receta lo que hay en la foto?"
         }
         return (title)
     }
