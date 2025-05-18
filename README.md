@@ -45,10 +45,10 @@ SugarIt enables users to:
 SugarIt/
 │
 ├── backend/ # Controllers, models, utilities, viewmodels
-│ ├── controllers/
-│ ├── models/
-│ ├── utils/
-│ └── viewmodels/
+│ ├── controllers/ # Business logic controllers
+│ ├── models/ # Data models
+│ ├── utils/ # Utility classes and helpers
+│ └── viewmodels/ # ViewModel classes for MVVM architecture
 │
 ├── Views/ # UI logic and activity/fragment classes
 │
@@ -58,7 +58,7 @@ SugarIt/
 ├── build.gradle # Gradle build configuration
 └── ... # Other standard Android project files
 
-text
+
 
 ---
 
