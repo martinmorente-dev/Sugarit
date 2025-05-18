@@ -10,7 +10,7 @@ object Retrofit
 
     val api: SpoonAPIService by lazy {
         Retrofit.Builder()
-            .baseUrl("https://api.spoonacular.com/")
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(SpoonAPIService::class.java)

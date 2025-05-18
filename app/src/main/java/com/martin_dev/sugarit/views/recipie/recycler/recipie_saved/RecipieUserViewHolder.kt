@@ -19,14 +19,10 @@ class RecipieUserViewHolder(
         Glide.with(binding.recipieImage.context).load(recipe.image).into(binding.recipieImage)
 
         val carbs = recipe.nutrition.nutrients.find {
-            it.name.equals("Carbohydrates", ignoreCase = true) ||
-                    it.name.equals("Carbohidratos netos", ignoreCase = true) ||
-                    it.name.equals("Carbohidratos", ignoreCase = true)
+            it.name.equals("Carbohidratos netos", ignoreCase = true)
         }
         val sugar = recipe.nutrition.nutrients.find {
-            it.name.equals("Sugar", ignoreCase = true) ||
-                    it.name.equals("Azúcar", ignoreCase = true) ||
-                    it.name.equals("Azucar", ignoreCase = true)
+            it.name.equals("Azúcar", ignoreCase = true)
         }
 
         binding.nutrients.text = "Carbs: ${carbs?.amount?.roundToInt() ?: 0} ${carbs?.unit ?: ""}\n" +

@@ -73,6 +73,7 @@ dependencies {
     implementation("com.google.mlkit:translate:17.0.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     implementation("com.google.firebase:firebase-database-ktx")
+    implementation("com.google.mlkit:object-detection:17.0.2")
 
 }
 
