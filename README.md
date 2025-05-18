@@ -24,10 +24,7 @@
 
 SugarIt enables users to:
 - Scan food labels using their device camera.
-- Recognize and extract text from images via ML Kit.
 - Retrieve nutritional information and recipes using the Spoonacular API.
-- Save and review scan history.
-
 ---
 
 ## Features
@@ -35,29 +32,27 @@ SugarIt enables users to:
 - Real-time label scanning and text recognition.
 - Integration with Spoonacular API for nutritional data.
 - User-friendly interface with adaptive layouts.
-- Local storage of scan history.
 - Secure handling of user data and permissions.
 
 ---
 
 ## Project Structure
 
-SugarIt/
-│
-├── backend/ # Controllers, models, utilities, viewmodels
-│ ├── controllers/ # Business logic controllers
-│ ├── models/ # Data models
-│ ├── utils/ # Utility classes and helpers
-│ └── viewmodels/ # ViewModel classes for MVVM architecture
-│
-├── Views/ # UI logic and activity/fragment classes
-│
-├── res/ # XML layouts, drawable resources, strings, etc.
-│
-├── AndroidManifest.xml # App manifest and permissions
-├── build.gradle # Gradle build configuration
-└── ... # Other standard Android project files
-
+SugarIt/<br>
+│<br>
+├── backend/ # Controllers, models, utilities, viewmodels<br>
+│ ├── controllers/ # Business logic controllers<br>
+│ ├── models/ # Data models<br>
+│ ├── utils/ # Utility classes and helpers<br>
+│ └── viewmodels/ # ViewModel classes for MVVM architecture<br>
+│<br>
+├── Views/ # UI logic and activity/fragment classes<br>
+│<br>
+├── res/ # XML layouts, drawable resources, strings, etc.<br>
+│<br>
+├── AndroidManifest.xml # App manifest and permissions<br>
+├── build.gradle # Gradle build configuration<br>
+└── ... # Other standard Android project files<br>
 
 
 ---
@@ -94,8 +89,6 @@ The app requests camera and storage permissions at runtime.
 - Open the app and grant necessary permissions.
 - Use the main screen to scan food labels.
 - View recognized ingredients and nutritional information.
-- Access your scan history from the menu.
-
 ---
 
 ## Technical Details
@@ -104,7 +97,6 @@ The app requests camera and storage permissions at runtime.
 - **Minimum Android Version:** 8.0 (Oreo)
 - **Libraries:** ML Kit, Spoonacular API, AndroidX, SQLite
 - **Architecture:** MVVM (Model-View-ViewModel)
-- **Local Storage:** SQLite for scan history and user preferences
 
 ---
 
