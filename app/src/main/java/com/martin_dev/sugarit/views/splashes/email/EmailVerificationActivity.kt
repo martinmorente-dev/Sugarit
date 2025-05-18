@@ -24,8 +24,8 @@ class EmailVerificationActivity : AppCompatActivity() {
     private lateinit var email: String
     private lateinit var password: String
 
-    private val VERIFICATION_TIMEOUT = 120000L // 2 min  in milliseconds
-    private val CHECK_INTERVAL = 3000L // 3 seconds interval for checking email verification
+    private val VERIFICATION_TIMEOUT = 120000L
+    private val CHECK_INTERVAL = 3000L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,17 +69,16 @@ class EmailVerificationActivity : AppCompatActivity() {
         val currentUser = auth.currentUser
         currentUser?.delete()?.addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                Log.d("EmailVerification", "User account deleted due to unverified email.")
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
                 finish()
-            } else {
+            } else
                 Log.e("EmailVerification", "Failed to delete user account.")
-            }
         }
     }
 
     private fun initListeners() {
+        binding.resendEmailBtn.visibility = View.VISIBLE
         binding.resendEmailBtn.setOnClickListener {
             resendEmail()
         }

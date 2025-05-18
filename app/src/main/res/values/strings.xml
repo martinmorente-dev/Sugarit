@@ -26,6 +26,7 @@
     <!-- Email Verification -->
     <string name="description_txt">Te enviamos un email de verificación por favor revisa tu bandeja de entrada</string>
     <string name="resend_email">Reenviar</string>
+    <string name="email_txt">Revisa tu bandeja de entrada</string>
 
     <!-- Contexts -->
     <string name="img_food_context">Botón del menú para ir a la pantalla de escaneo de comida</string>
