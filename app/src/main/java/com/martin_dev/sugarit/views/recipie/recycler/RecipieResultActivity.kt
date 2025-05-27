@@ -41,7 +41,7 @@ class RecipieResultActivity() : AppCompatActivity()
     {
         adapter = RecipieAdapter(
             onItemClick = { recipie ->
-                RecipieController(this, this).searchRecipieUrl(recipie.id)
+               Log.i("repieClicked", "The recipie ${recipie.title} was clicked");
             },
             onSaveClick = { recipie ->
                 RecipieController(this, this).saveRecipe(recipie.id.toString())
@@ -55,11 +55,10 @@ class RecipieResultActivity() : AppCompatActivity()
     fun observeRecycler()
     {
         viewModel.recipies.observe(this) { recipies ->
-            if (recipies.isEmpty()) {
+            if (recipies.isEmpty())
                 AlertMessage().createAlert("No results found", this)
-                Log.i("RecipieResultActivity", "No results found")
-            }
-            adapter.setRecipies(recipies)
+            else
+                adapter.setRecipies(recipies)
         }
     }
 

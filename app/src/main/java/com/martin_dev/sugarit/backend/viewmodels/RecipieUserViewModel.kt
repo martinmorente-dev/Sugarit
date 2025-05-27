@@ -102,16 +102,5 @@ class RecipieUserViewModel : ViewModel() {
             }
     }
 
-    suspend fun fetchRecipeUrlById(recipeId: Int): String? {
-        return try {
-            val response = Retrofit.api.getRecipeURLByid(recipeId, apiKey = BuildConfig.API_KEY)
-            if (response.isSuccessful) {
-                response.body()?.url
-            } else null
-        } catch (e: Exception) {
-            null
-        }
-    }
-
 
 }

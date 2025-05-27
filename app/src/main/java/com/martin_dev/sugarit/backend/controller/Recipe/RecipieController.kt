@@ -10,28 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.martin_dev.sugarit.backend.utilites.validation.AlertMessage
-import com.martin_dev.sugarit.backend.viewmodels.RecipieURLViewModel
 
 class RecipieController(private val context: Context, private val lifecycleOwner: LifecycleOwner) {
-
-    private val urlViewModel: RecipieURLViewModel by lazy {
-        ViewModelProvider(context as FragmentActivity)[RecipieURLViewModel::class.java]
-    }
-
-    fun searchRecipieUrl(recipeId: Int)
-    {
-        urlViewModel.searchRecipieUrl(recipeId)
-        urlViewModel.recipeurl.observe(lifecycleOwner) { recipieResponse ->
-            val url = recipieResponse.url
-            if(!url.isNullOrBlank())
-            {
-                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                context.startActivity(browserIntent)
-            }
-            else
-                AlertMessage().createAlert("No url found", context)
-        }
-    }
 
     fun saveRecipe(recipeId: String)
     {

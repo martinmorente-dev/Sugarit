@@ -1,12 +1,9 @@
 package com.martin_dev.sugarit.views.recipie
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.widget.Toast
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -16,7 +13,6 @@ import com.google.firebase.database.ValueEventListener
 import com.martin_dev.sugarit.backend.viewmodels.RecipieUserViewModel
 import com.martin_dev.sugarit.databinding.ActivityUserRecipiesBinding
 import com.martin_dev.sugarit.views.recipie.recycler.recipie_saved.RecipieUserAdapter
-import kotlinx.coroutines.launch
 
 class UserRecipiesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUserRecipiesBinding
@@ -42,19 +38,7 @@ class UserRecipiesActivity : AppCompatActivity() {
                 viewModel.deleteRecipie(recipe.id.toString())
             },
             onItemClick = { recipe ->
-                lifecycleScope.launch {
-                    val url = viewModel.fetchRecipeUrlById(recipe.id)
-                    if (url != null && (url.startsWith("http://") || url.startsWith("https://"))) {
-                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                        if (intent.resolveActivity(packageManager) != null) {
-                            startActivity(intent)
-                        } else {
-                            Toast.makeText(this@UserRecipiesActivity, "No hay navegador disponible", Toast.LENGTH_SHORT).show()
-                        }
-                    } else {
-                        Toast.makeText(this@UserRecipiesActivity, "No se pudo obtener la URL de la receta", Toast.LENGTH_SHORT).show()
-                    }
-                }
+                Log.i("Recipie User","The recipie ${recipe.title}")
             }
         )
         binding.recipieSaveRecycler.layoutManager = LinearLayoutManager(this)

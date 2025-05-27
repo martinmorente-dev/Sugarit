@@ -37,7 +37,8 @@ class RecipieAdapter(private val onItemClick: (RecipieSponnacular) -> Unit, priv
         holder.binding.root.setOnClickListener {
             onItemClick(recipies[position])
         }
-        holder.binding.saveRecipeBtn.setOnClickListener {
+        holder.binding.saveRecipeBtn.setOnClickListener{
+            // Change image
             onSaveClick(recipies[position])
         }
     }
