@@ -4,11 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
-import com.martin_dev.sugarit.BuildConfig
 import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.Nutrient
-import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.RecipieSponnacular
+import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.Recipe
 import com.martin_dev.sugarit.backend.utilites.retrofit.Retrofit
 import com.martin_dev.sugarit.backend.utilites.traductions.TranslaterEnToSp
 import kotlinx.coroutines.Dispatchers
@@ -16,8 +13,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class RecipieUserViewModel : ViewModel() {
-    private val _recipies = MutableLiveData<List<RecipieSponnacular>>()
-    val recipiesData: LiveData<List<RecipieSponnacular>> = _recipies
+    private val _recipies = MutableLiveData<List<Recipe>>()
+    val recipiesData: LiveData<List<Recipe>> = _recipies
 
     fun fetchRecipies(recipieIds: List<String>) {
         val ids = recipieIds.joinToString(",")
@@ -43,11 +40,11 @@ class RecipieUserViewModel : ViewModel() {
     }
 
     private fun translateRecipies(
-        recipies: List<RecipieSponnacular>,
-        onAllTranslated: (List<RecipieSponnacular>) -> Unit
+        recipies: List<Recipe>,
+        onAllTranslated: (List<Recipe>) -> Unit
     ) {
         val translater = TranslaterEnToSp()
-        val translatedRecipes = mutableListOf<RecipieSponnacular>()
+        val translatedRecipes = mutableListOf<Recipe>()
         var completedRecipes = 0
 
         if (recipies.isEmpty()) {
@@ -92,15 +89,4 @@ class RecipieUserViewModel : ViewModel() {
             }
         }
     }
-
-    fun deleteRecipie(recipieId: String) {
-        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
-        FirebaseDatabase.getInstance().getReference("users").child(userId)
-            .child("savedRecipies").child(recipieId).removeValue()
-            .addOnSuccessListener {
-                _recipies.postValue(_recipies.value?.filter { it.id.toString() != recipieId })
-            }
-    }
-
-
 }

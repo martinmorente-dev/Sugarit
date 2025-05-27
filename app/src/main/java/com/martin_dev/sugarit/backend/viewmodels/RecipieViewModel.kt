@@ -7,42 +7,48 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.martin_dev.sugarit.BuildConfig
 import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.Nutrient
-import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.RecipieSponnacular
+import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.Recipe
 import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.RecipieResponse
 import com.martin_dev.sugarit.backend.utilites.traductions.TranslaterEnToSp
 import kotlinx.coroutines.launch
 import com.martin_dev.sugarit.backend.utilites.retrofit.Retrofit
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import kotlinx.coroutines.tasks.await
 
-class RecipieViewModel: ViewModel()
-{
+class RecipieViewModel : ViewModel() {
 
-    private val _recipies = MutableLiveData<List<RecipieSponnacular>>()
-    val recipies: LiveData<List<RecipieSponnacular>> = _recipies
+    private val _recipies = MutableLiveData<List<Recipe>>()
+    val recipies: LiveData<List<Recipe>> = _recipies
 
-    fun searchByIngredients(ingredients: String, alergies: String)
-    {
+    fun searchByIngredients(ingredients: String, alergies: String) {
         viewModelScope.launch {
-            try
-            {
-                val response = Retrofit.api.getRecipieByIngredient(ingredients, apiKey = BuildConfig.API_KEY, intolerances = alergies)
-                if (response.isSuccessful)
-                {
+            try {
+                val response = Retrofit.api.getRecipieByIngredient(
+                    ingredients,
+                    apiKey = BuildConfig.API_KEY,
+                    intolerances = alergies
+                )
+                if (response.isSuccessful) {
                     val body = response.body()
-                    if(body != null)
-                    {
+                    if (body != null) {
                         translatedList(listOf(body)) { onAllTranslated ->
                             val traducedRecipies = onAllTranslated.flatMap { it.results }
-                            _recipies.postValue(traducedRecipies)
+                            viewModelScope.launch {
+                                val savedIds = getSavedRecipeIdsFromFirebase()
+                                val recetasMarcadas = traducedRecipies.map { receta ->
+                                    receta.copy(isSaved = savedIds.contains(receta.id))
+                                }
+                                _recipies.postValue(recetasMarcadas)
+                            }
                         }
-                    }
-                    else
+                    } else {
                         _recipies.value = emptyList()
-                }
-                else
+                    }
+                } else {
                     _recipies.value = emptyList()
-            }
-            catch (e: Exception)
-            {
+                }
+            } catch (e: Exception) {
                 _recipies.value = emptyList()
                 Log.e("RecipieViewModel", "Error: ${e.message}")
             }
@@ -50,9 +56,8 @@ class RecipieViewModel: ViewModel()
     }
 
     fun translatedList(apiResults: List<RecipieResponse>, onAllTranslated: (List<RecipieResponse>) -> Unit) {
-
         val translater = TranslaterEnToSp()
-        val translatedRecipes = mutableListOf<RecipieSponnacular>()
+        val translatedRecipes = mutableListOf<Recipe>()
         val allRecipes = apiResults.flatMap { it.results }
         var completedRecipes = 0
 
@@ -87,6 +92,31 @@ class RecipieViewModel: ViewModel()
                     }
                 }
             }
+        }
+    }
+
+    private suspend fun getSavedRecipeIdsFromFirebase(): Set<Int> {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return emptySet()
+        val dbRef = FirebaseDatabase.getInstance().getReference("users/$userId/savedRecipies")
+        val snapshot = dbRef.get().await()
+        return snapshot.children.mapNotNull { it.key?.toIntOrNull() }.toSet()
+    }
+
+    fun saveRecipe(recipeId: String) {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        val userRef = FirebaseDatabase.getInstance().getReference("users").child(userId)
+        userRef.child("savedRecipies").child(recipeId).setValue(true)
+    }
+
+    fun deleteRecipie(recipieId: String) {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        val userRef = FirebaseDatabase.getInstance().getReference("users").child(userId)
+        userRef.child("savedRecipies").child(recipieId).removeValue()
+    }
+
+    fun updateRecipieSavedState(recipieId: Int, isSaved: Boolean) {
+        _recipies.value = _recipies.value?.map {
+            if (it.id == recipieId) it.copy(isSaved = isSaved) else it
         }
     }
 }

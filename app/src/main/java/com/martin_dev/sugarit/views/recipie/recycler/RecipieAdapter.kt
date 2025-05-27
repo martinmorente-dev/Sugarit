@@ -4,16 +4,19 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.RecipieSponnacular
+import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.Recipe
 import com.martin_dev.sugarit.databinding.ActivityItemRecipieBinding
 import kotlin.math.roundToInt
+import com.martin_dev.sugarit.R
+import com.martin_dev.sugarit.backend.viewmodels.RecipieUserViewModel
+import com.martin_dev.sugarit.views.recipie.recycler.recipie_saved.RecipieUserAdapter
 
-class RecipieAdapter(private val onItemClick: (RecipieSponnacular) -> Unit, private val onSaveClick: (RecipieSponnacular) -> Unit) : RecyclerView.Adapter<RecipieViewHolder>()
+class RecipieAdapter(private val onItemClick: (Recipe) -> Unit, private val onSaveClick: (Recipe) -> Unit) : RecyclerView.Adapter<RecipieViewHolder>()
 {
 
-    private val recipies = mutableListOf<RecipieSponnacular>()
+    private val recipies = mutableListOf<Recipe>()
 
-    fun setRecipies(newRecipies: List<RecipieSponnacular>)
+    fun setRecipies(newRecipies: List<Recipe>)
     {
         recipies.clear()
         recipies.addAll(newRecipies)
@@ -37,8 +40,12 @@ class RecipieAdapter(private val onItemClick: (RecipieSponnacular) -> Unit, priv
         holder.binding.root.setOnClickListener {
             onItemClick(recipies[position])
         }
+        holder.binding.saveRecipeBtn.setImageResource(
+            if (recipies[position].isSaved) R.drawable.bookmark_filled else R.drawable.save_img
+        )
         holder.binding.saveRecipeBtn.setOnClickListener{
-            // Change image
+            recipies[position].isSaved = !recipies[position].isSaved
+            notifyItemChanged(position)
             onSaveClick(recipies[position])
         }
     }

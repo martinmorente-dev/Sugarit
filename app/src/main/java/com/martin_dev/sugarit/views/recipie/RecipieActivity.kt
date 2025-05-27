@@ -32,10 +32,6 @@ class RecipieActivity : AppCompatActivity() {
                 var intent = Intent(this, RecipieResultActivity::class.java)
                 TranslaterSpToEn().translate(ingredients) { translatedText ->
                     ingredients = translatedText.toString()
-
-                    Log.i("Ingredients Translated", ingredients)
-                    Log.i("Alergies Translated", alergies)
-
                     intent.putExtra("ingredients", ingredients)
                     intent.putExtra("alergies",alergies)
                     startActivity(intent)

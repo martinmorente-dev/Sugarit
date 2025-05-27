@@ -1,19 +1,16 @@
 package com.martin_dev.sugarit.backend.controller.api.spoonacular
 
 import com.martin_dev.sugarit.BuildConfig
-import com.martin_dev.sugarit.backend.model.api.Spoonacular.food.Food
 import com.martin_dev.sugarit.backend.model.api.Spoonacular.food.FoodResponse
 import com.martin_dev.sugarit.backend.model.api.Spoonacular.food.NutritionResponse
-import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.Nutrition
 import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.RecipieResponse
-import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.RecipieSponnacular
+import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.Recipe
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface SpoonAPIService
-{
+interface SpoonAPIService {
     @GET("recipes/complexSearch")
     suspend fun getRecipieByIngredient(
         @Query("includeIngredients") ingredients: String,
@@ -29,14 +26,14 @@ interface SpoonAPIService
         @Query("ids") ids: String,
         @Query("apiKey") apiKey: String = BuildConfig.API_KEY,
         @Query("includeNutrition") includeNutrition: Boolean = true
-    ): Response<List<RecipieSponnacular>>
+    ): Response<List<Recipe>>
 
     @GET("food/ingredients/search")
     suspend fun getFood(
         @Query("apiKey") apiKey: String = BuildConfig.API_KEY,
         @Query("query") food: String,
         @Query("number") number: Int = 1
-        ):Response<FoodResponse>
+    ): Response<FoodResponse>
 
     @GET("food/ingredients/{id}/information")
     suspend fun getFoodNutrition(

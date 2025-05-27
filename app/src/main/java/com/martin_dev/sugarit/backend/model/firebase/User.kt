@@ -4,5 +4,4 @@ data class User(
     val id: String,
     val email: String,
     val savedRecipies: Map<Int, Boolean> ?= null,
-    val savedFood: Map<Int, Boolean> ?= null
 )

@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.martin_dev.sugarit.backend.utilites.validation.AlertMessage
 import com.martin_dev.sugarit.backend.viewmodels.RecipieViewModel
 import com.martin_dev.sugarit.databinding.ActivityRecipieResultBinding
-import com.martin_dev.sugarit.backend.controller.Recipe.RecipieController
 import com.martin_dev.sugarit.views.recipie.UserRecipiesActivity
 
 class RecipieResultActivity() : AppCompatActivity()
@@ -30,6 +29,12 @@ class RecipieResultActivity() : AppCompatActivity()
         searchRecipies()
     }
 
+    override fun onResume()
+    {
+        super.onResume()
+        searchRecipies()
+    }
+
     fun innitListeners()
     {
         binding.userRecipiesBtn.setOnClickListener {
@@ -41,11 +46,21 @@ class RecipieResultActivity() : AppCompatActivity()
     {
         adapter = RecipieAdapter(
             onItemClick = { recipie ->
-               Log.i("repieClicked", "The recipie ${recipie.title} was clicked");
+               Log.i("repieClicked", "The recipie ${recipie.title} was clicked")
             },
             onSaveClick = { recipie ->
-                RecipieController(this, this).saveRecipe(recipie.id.toString())
-                Toast.makeText(this, "Recipe saved", Toast.LENGTH_SHORT).show()
+                if (recipie.isSaved)
+                {
+                    viewModel.saveRecipe(recipie.id.toString())
+                    viewModel.updateRecipieSavedState(recipie.id, true)
+                    Toast.makeText(this,"Receta ${recipie.title} guardada",Toast.LENGTH_SHORT).show()
+                }
+                else
+                {
+                    viewModel.deleteRecipie(recipie.id.toString())
+                    viewModel.updateRecipieSavedState(recipie.id, false)
+                    Toast.makeText(this,"Receta ${recipie.title} eliminada",Toast.LENGTH_SHORT).show()
+                }
             }
         )
         binding.listResults.layoutManager = LinearLayoutManager(this)

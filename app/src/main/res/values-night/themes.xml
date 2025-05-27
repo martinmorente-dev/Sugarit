@@ -5,11 +5,15 @@
         <item name="android:windowBackground">@color/background_app</item>
         <item name="componentBackground">@color/background_component</item>
         <item name="btnBackground">@color/background_btn</item>
+        <item name="android:fontFamily">@font/golos_text</item>
+
     </style>
     <!-- Base application theme. -->
     <style name="Base.Theme.Sugarit" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:windowBackground">@color/background_app</item>
         <item name="componentBackground">@color/background_component</item>
         <item name="btnBackground">@color/background_btn</item>
+        <item name="android:fontFamily">@font/golos_text</item>
+
     </style>
 </resources>
