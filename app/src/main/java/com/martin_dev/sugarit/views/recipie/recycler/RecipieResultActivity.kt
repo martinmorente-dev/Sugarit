@@ -6,11 +6,13 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.martin_dev.sugarit.backend.utilites.validation.AlertMessage
 import com.martin_dev.sugarit.backend.viewmodels.RecipieViewModel
 import com.martin_dev.sugarit.databinding.ActivityRecipieResultBinding
 import com.martin_dev.sugarit.views.recipie.UserRecipiesActivity
+import com.martin_dev.sugarit.views.recipie.instructions.InstructionsRecipeActivity
 
 class RecipieResultActivity() : AppCompatActivity()
 {
@@ -45,21 +47,24 @@ class RecipieResultActivity() : AppCompatActivity()
     fun innitRecycler()
     {
         adapter = RecipieAdapter(
-            onItemClick = { recipie ->
-               Log.i("repieClicked", "The recipie ${recipie.title} was clicked")
+            onItemClick = { recipe ->
+               var intent = Intent(this, InstructionsRecipeActivity::class.java)
+                intent.putExtra("urlImage",recipe.image)
+                intent.putExtra("recipeName",recipe.title)
+                startActivity(intent)
             },
-            onSaveClick = { recipie ->
-                if (recipie.isSaved)
+            onSaveClick = { recipe ->
+                if (recipe.isSaved)
                 {
-                    viewModel.saveRecipe(recipie.id.toString())
-                    viewModel.updateRecipieSavedState(recipie.id, true)
-                    Toast.makeText(this,"Receta ${recipie.title} guardada",Toast.LENGTH_SHORT).show()
+                    viewModel.saveRecipe(recipe.id.toString())
+                    viewModel.updateRecipieSavedState(recipe.id, true)
+                    Toast.makeText(this,"Receta ${recipe.title} guardada",Toast.LENGTH_SHORT).show()
                 }
                 else
                 {
-                    viewModel.deleteRecipie(recipie.id.toString())
-                    viewModel.updateRecipieSavedState(recipie.id, false)
-                    Toast.makeText(this,"Receta ${recipie.title} eliminada",Toast.LENGTH_SHORT).show()
+                    viewModel.deleteRecipie(recipe.id.toString())
+                    viewModel.updateRecipieSavedState(recipe.id, false)
+                    Toast.makeText(this,"Receta ${recipe.title} eliminada",Toast.LENGTH_SHORT).show()
                 }
             }
         )
