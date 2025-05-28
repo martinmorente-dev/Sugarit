@@ -33,12 +33,17 @@
     <string name="camera_context">Imagen para encender la cámara del móvil y escanear la comida</string>
     <string name="fridge_context">Imagen nevera</string>
     <string name="marshmallow">Imagen de un malvavisco esperando alégremente</string>
+    <string name="marshmallowChef">Imagen Malvavisco</string>
+    <string name="backBtn">Botón para ir hacia atrás</string>
 
     <!-- Item Recipie Save-->
     <string name="erase_btn">Eliminar</string>
 
     <!-- Instructions Recipie -->
-    <string name="marshmallowChef">Imagen Malvavisco</string>
+    <string name="image_context">Imagen de la receta</string>
+    <string name="ingredients">Ingredientes</string>
+    <string name="steps">Pasos</string>
+
 
     <!--Activity Result-->
     <string name="btn_user_recipies">Mis Recetas</string>
