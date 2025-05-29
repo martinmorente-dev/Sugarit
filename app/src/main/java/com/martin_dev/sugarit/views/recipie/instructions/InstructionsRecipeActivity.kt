@@ -19,10 +19,6 @@ class InstructionsRecipeActivity : AppCompatActivity() {
         binding = ActivityInstructionsRecipeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         innitListenners()
-        intent.getStringExtra("urlImage")?: ""
-        intent.getStringExtra("recipeName")?: ""
-        Log.i("urlImage",intent.getStringExtra("urlImage")?: "No url passed")
-        Log.i("recipeName",intent.getStringExtra("recipeName")?: "No name passed")
         binding.title.text = intent.getStringExtra("recipeName")
         Glide.with(this).load(binding.recipeImage.context)
             .load(intent.getStringExtra("urlImage")?.toUri())
@@ -31,6 +27,7 @@ class InstructionsRecipeActivity : AppCompatActivity() {
 
     private fun innitListenners()
     {
+        binding.backBtn.bringToFront()
         binding.backBtn.setOnClickListener{
             startActivity(Intent(this, RecipieActivity::class.java))
         }
