@@ -5,6 +5,7 @@ import com.martin_dev.sugarit.backend.model.api.Spoonacular.food.FoodResponse
 import com.martin_dev.sugarit.backend.model.api.Spoonacular.food.NutritionResponse
 import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.RecipieResponse
 import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.Recipe
+import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.instructions.RecipeInstructionResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -42,4 +43,10 @@ interface SpoonAPIService {
         @Query("unit") unit: String = "medium",
         @Query("apiKey") apiKey: String = BuildConfig.API_KEY
     ): Response<NutritionResponse>
+
+    @GET("recipes/{id}/information")
+    suspend fun getRecipeInstruction(
+        @Path("id") recipeId: Int,
+        @Query("apiKey") apiKey: String = BuildConfig.API_KEY
+    ): Response<RecipeInstructionResponse>
 }

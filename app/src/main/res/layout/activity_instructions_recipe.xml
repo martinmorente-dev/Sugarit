@@ -132,6 +132,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/containerTitles">
 
+
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
@@ -147,37 +148,46 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
                 android:orientation="horizontal"
+                android:gravity="center_vertical"
                 android:padding="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/timeContainer"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/containerTitles"
-                app:layout_constraintVertical_bias="0.2">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
 
-                <TextView
-                    android:id="@+id/recipeIngredients"
+                <ScrollView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
+                    android:layout_height="150dp"
                     android:layout_weight="1"
-                    android:gravity="start"
-                    android:text="AAAA"
-                    android:textColor="@color/black"
-                    />
+                    android:fillViewport="true">
 
-                <TextView
-                    android:id="@+id/recipeInstructions"
+                    <TextView
+                        android:id="@+id/recipeIngredients"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:gravity="start"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"/>
+                </ScrollView>
+
+                <ScrollView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="150dp"
                     android:layout_weight="1"
-                    android:text="AAAA"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    />
+                    android:fillViewport="true">
+
+                    <TextView
+                        android:id="@+id/recipeInstructions"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"/>
+                </ScrollView>
 
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

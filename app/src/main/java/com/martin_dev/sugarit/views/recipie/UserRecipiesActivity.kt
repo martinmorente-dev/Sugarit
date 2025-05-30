@@ -8,8 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.martin_dev.sugarit.backend.viewmodels.RecipieUserViewModel
-import com.martin_dev.sugarit.backend.viewmodels.RecipieViewModel
+import com.martin_dev.sugarit.backend.viewmodels.recipe.RecipieUserViewModel
+import com.martin_dev.sugarit.backend.viewmodels.recipe.RecipieViewModel
 import com.martin_dev.sugarit.databinding.ActivityUserRecipiesBinding
 import com.martin_dev.sugarit.views.recipie.recycler.recipie_saved.RecipieUserAdapter
 

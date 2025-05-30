@@ -2,14 +2,12 @@ package com.martin_dev.sugarit.views.recipie.recycler
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.net.toUri
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.martin_dev.sugarit.backend.utilites.validation.AlertMessage
-import com.martin_dev.sugarit.backend.viewmodels.RecipieViewModel
+import com.martin_dev.sugarit.backend.viewmodels.recipe.RecipieViewModel
 import com.martin_dev.sugarit.databinding.ActivityRecipieResultBinding
 import com.martin_dev.sugarit.views.recipie.UserRecipiesActivity
 import com.martin_dev.sugarit.views.recipie.instructions.InstructionsRecipeActivity
@@ -51,6 +49,7 @@ class RecipieResultActivity() : AppCompatActivity()
                var intent = Intent(this, InstructionsRecipeActivity::class.java)
                 intent.putExtra("urlImage",recipe.image)
                 intent.putExtra("recipeName",recipe.title)
+                intent.putExtra("recipeId",recipe.id)
                 startActivity(intent)
             },
             onSaveClick = { recipe ->

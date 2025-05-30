@@ -1,4 +1,4 @@
-package com.martin_dev.sugarit.backend.viewmodels
+package com.martin_dev.sugarit.backend.viewmodels.recipe
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -22,7 +22,7 @@ class RecipieUserViewModel : ViewModel() {
             try {
                 val response = Retrofit.api.getRecipeBulk(ids = ids)
                 val recipies = response.body()
-                if (recipies != null && recipies.isNotEmpty()) {
+                if (!recipies.isNullOrEmpty()) {
                     translateRecipies(recipies) { translatedList ->
                         _recipies.postValue(translatedList)
                     }

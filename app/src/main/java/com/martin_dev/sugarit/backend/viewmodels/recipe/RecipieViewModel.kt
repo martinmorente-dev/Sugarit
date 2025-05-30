@@ -1,4 +1,4 @@
-package com.martin_dev.sugarit.backend.viewmodels
+package com.martin_dev.sugarit.backend.viewmodels.recipe
 
 import android.util.Log
 import androidx.lifecycle.LiveData

@@ -8,8 +8,6 @@ import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.Recipe
 import com.martin_dev.sugarit.databinding.ActivityItemRecipieBinding
 import kotlin.math.roundToInt
 import com.martin_dev.sugarit.R
-import com.martin_dev.sugarit.backend.viewmodels.RecipieUserViewModel
-import com.martin_dev.sugarit.views.recipie.recycler.recipie_saved.RecipieUserAdapter
 
 class RecipieAdapter(private val onItemClick: (Recipe) -> Unit, private val onSaveClick: (Recipe) -> Unit) : RecyclerView.Adapter<RecipieViewHolder>()
 {
