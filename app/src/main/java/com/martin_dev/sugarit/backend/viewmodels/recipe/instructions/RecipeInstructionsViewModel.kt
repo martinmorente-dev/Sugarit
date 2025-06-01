@@ -53,7 +53,6 @@ class RecipeInstructionsViewModel: ViewModel()
         }
     }
 
-
     private suspend fun translateRecipe(recipe: RecipeInstructionResponse): RecipeInstructionResponse
     {
         val translater = TranslaterEnToSp()

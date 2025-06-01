@@ -47,5 +47,7 @@
 
     <!--Activity Result-->
     <string name="btn_user_recipies">Mis Recetas</string>
+    <string name="clear_selection">Botón para eliminar los seleccionados</string>
+    <string name="selected">Seleccionados: </string>
 
 </resources>

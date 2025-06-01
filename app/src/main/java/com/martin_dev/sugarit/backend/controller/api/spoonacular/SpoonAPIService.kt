@@ -3,6 +3,7 @@ package com.martin_dev.sugarit.backend.controller.api.spoonacular
 import com.martin_dev.sugarit.BuildConfig
 import com.martin_dev.sugarit.backend.model.api.Spoonacular.food.FoodResponse
 import com.martin_dev.sugarit.backend.model.api.Spoonacular.food.NutritionResponse
+import com.martin_dev.sugarit.backend.model.api.Spoonacular.food.autocomplete.IngredientSuggestion
 import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.RecipieResponse
 import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.Recipe
 import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.instructions.RecipeInstructionResponse
@@ -12,12 +13,20 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface SpoonAPIService {
+
+
+    @GET("food/ingredients/autocomplete")
+    suspend fun autocompleteIngredient(
+        @Query("query") ingredient: String,
+        @Query("number") number: Int = 10,
+        @Query("apiKey") apiKey: String = BuildConfig.API_KEY
+    ): Response<List<IngredientSuggestion>>
+
     @GET("recipes/complexSearch")
     suspend fun getRecipieByIngredient(
         @Query("includeIngredients") ingredients: String,
-        @Query("maxSugar") maxSugar: Int = 5,
-        @Query("maxCarbs") maxCarbs: Int = 20,
         @Query("intolerances") intolerances: String,
+        @Query("addRecipeNutrition") addRecipeNutrition: Boolean = true,
         @Query("apiKey") apiKey: String
     ): Response<RecipieResponse>
 

@@ -2,6 +2,7 @@ package com.martin_dev.sugarit.views.recipie.recycler
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -74,8 +75,10 @@ class RecipieResultActivity() : AppCompatActivity()
     fun observeRecycler()
     {
         viewModel.recipies.observe(this) { recipies ->
-            if (recipies.isEmpty())
+            if (recipies.isNullOrEmpty()) {
+                Log.i("RecipieResults", "No results found")
                 AlertMessage().createAlert("No results found", this)
+            }
             else
                 adapter.setRecipies(recipies)
         }
