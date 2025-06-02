@@ -72,19 +72,17 @@ class RecipieResultActivity() : AppCompatActivity()
         binding.listResults.adapter = adapter
     }
 
-    fun observeRecycler()
+  private fun observeRecycler()
     {
         viewModel.recipies.observe(this) { recipies ->
-            if (recipies.isNullOrEmpty()) {
-                Log.i("RecipieResults", "No results found")
-                AlertMessage().createAlert("No results found", this)
-            }
+            if (recipies.isNullOrEmpty())
+                startActivity(Intent(this, RecipeResultErrorActivity::class.java))
             else
                 adapter.setRecipies(recipies)
         }
     }
 
-    fun searchRecipies()
+    private fun searchRecipies()
     {
         val ingredients = intent.getStringExtra("ingredients") ?: ""
         val alergies = intent.getStringExtra("alergies") ?: ""

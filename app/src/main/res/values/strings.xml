@@ -49,5 +49,7 @@
     <string name="btn_user_recipies">Mis Recetas</string>
     <string name="clear_selection">Botón para eliminar los seleccionados</string>
     <string name="selected">Seleccionados: </string>
+    <string name="no_response">No se encontraron recetas</string>
+    <string name="marsmallow_error">Marsmallow image with xx indicating there is no results</string>
 
 </resources>

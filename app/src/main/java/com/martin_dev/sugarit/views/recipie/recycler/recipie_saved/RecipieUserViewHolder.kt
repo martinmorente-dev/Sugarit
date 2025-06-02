@@ -3,7 +3,7 @@ package com.martin_dev.sugarit.views.recipie.recycler.recipie_saved
 import android.annotation.SuppressLint
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.Recipe
+import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.nutrition.Recipe
 import com.martin_dev.sugarit.databinding.ActivityItemRecipieSaveBinding
 import kotlin.math.roundToInt
 

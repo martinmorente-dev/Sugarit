@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.198" />
 
-    <AutoCompleteTextView
+    <TextView
         android:id="@+id/textFridge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,55 +41,25 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/userIngredients"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="160dp"
         app:boxBackgroundMode="outline"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/sendBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textFridge"
         app:layout_constraintVertical_bias="0.104">
 
-        <AutoCompleteTextView
-            android:id="@+id/autoCompleteIngredients"
+        <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:backgroundTint="#00FFFFFF"
+            android:gravity="top|start"
             android:hint="@string/ingredient_txt"
-            android:inputType="text"
+            android:inputType="textMultiLine"
+            android:minLines="1"
             android:padding="10dp" />
     </com.google.android.material.textfield.TextInputLayout>
-
-    <LinearLayout
-        android:id="@+id/selectedIngredientsLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/userIngredients"
-        app:layout_constraintStart_toStartOf="@id/userIngredients"
-        app:layout_constraintEnd_toEndOf="@id/userIngredients"
-        app:layout_constraintBottom_toTopOf="@id/sendBtn"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:gravity="center">
-
-        <TextView
-            android:id="@+id/selectedIngredientsText"
-            android:layout_width="190dp"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-
-        <ImageButton
-            android:id="@+id/clearSelectedBtn"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:background="@drawable/bg_circle_gray"
-            android:src="@drawable/close"
-            android:contentDescription="@string/clear_selection"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:scaleType="center" />
-    </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/sendBtn"
@@ -102,7 +72,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selectedIngredientsLayout"
-        app:layout_constraintVertical_bias="0.129" />
+        app:layout_constraintTop_toBottomOf="@+id/userIngredients"
+        app:layout_constraintVertical_bias="0.120" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

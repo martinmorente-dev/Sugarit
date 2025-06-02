@@ -1,11 +1,10 @@
 package com.martin_dev.sugarit.views.recipie.recycler
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.Recipe
+import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.nutrition.Recipe
 import com.martin_dev.sugarit.databinding.ActivityItemRecipieBinding
 import kotlin.math.roundToInt
 import com.martin_dev.sugarit.R
@@ -28,11 +27,12 @@ class RecipieAdapter(
         return RecipieViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: RecipieViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecipieViewHolder, position: Int)
+    {
         val recipe = recipies[position]
-        holder.binding.title.text = recipe.title
 
-        Log.d("RecipieAdapter", "Nutrientes: " + recipe.nutrition.nutrients.joinToString { it.name })
+
+        holder.binding.title.text = recipe.title
 
         val nutrientesFiltrados = recipe.nutrition.nutrients.filter {
             val nombre = it.name.lowercase()

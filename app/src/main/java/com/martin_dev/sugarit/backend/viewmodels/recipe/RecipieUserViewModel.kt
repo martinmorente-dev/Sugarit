@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.Nutrient
-import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.Recipe
+import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.nutrition.Nutrient
+import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.nutrition.Recipe
 import com.martin_dev.sugarit.backend.utilites.retrofit.Retrofit
 import com.martin_dev.sugarit.backend.utilites.traductions.TranslaterEnToSp
 import kotlinx.coroutines.Dispatchers
