@@ -85,7 +85,6 @@ class RecipieResultActivity() : AppCompatActivity()
     private fun searchRecipies()
     {
         val ingredients = intent.getStringExtra("ingredients") ?: ""
-        val alergies = intent.getStringExtra("alergies") ?: ""
-        viewModel.searchByIngredients(ingredients, alergies)
+        viewModel.searchByIngredients(ingredients)
     }
 }

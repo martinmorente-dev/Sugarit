@@ -3,7 +3,7 @@ package com.martin_dev.sugarit.views.recipie.recycler.recipie_saved
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.nutrition.Recipe
+import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.Recipe
 import com.martin_dev.sugarit.databinding.ActivityItemRecipieSaveBinding
 
 class RecipieUserAdapter(

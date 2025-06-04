@@ -36,7 +36,7 @@ class InstructionsRecipeActivity : AppCompatActivity() {
     private fun innitListeners() {
         binding.backBtn.bringToFront()
         binding.backBtn.setOnClickListener {
-            startActivity(Intent(this, RecipieResultActivity::class.java))
+            onBackPressedDispatcher.onBackPressed()
         }
     }
 

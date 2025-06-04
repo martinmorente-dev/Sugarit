@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.nutrition.Recipe
+import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.Recipe
 import com.martin_dev.sugarit.databinding.ActivityItemRecipieBinding
 import kotlin.math.roundToInt
 import com.martin_dev.sugarit.R
@@ -26,30 +26,21 @@ class RecipieAdapter(
         val binding = ActivityItemRecipieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return RecipieViewHolder(binding)
     }
-
-    override fun onBindViewHolder(holder: RecipieViewHolder, position: Int)
-    {
+    override fun onBindViewHolder(holder: RecipieViewHolder, position: Int) {
         val recipe = recipies[position]
-
-
         holder.binding.title.text = recipe.title
 
-        val nutrientesFiltrados = recipe.nutrition.nutrients.filter {
-            val nombre = it.name.lowercase()
-            nombre == "los hidratos de carbono" ||
-                    nombre == "azúcar"
-        }
+        val nutrientes = listOfNotNull(
+            recipe.carbs?.let { "Carbohidratos: ${it.roundToInt()} g" },
+            recipe.sugar?.let { "Azúcar: ${it.roundToInt()} g" }
+        )
 
-        holder.binding.nutrients.text = nutrientesFiltrados.joinToString(separator = "\n") {
-            "${it.name}: ${it.amount.roundToInt()} ${it.unit}"
-        }.ifEmpty {
+        holder.binding.nutrients.text = nutrientes.joinToString("\n").ifEmpty {
             "Sin datos de carbohidratos ni azúcar"
         }
 
         Glide.with(holder.binding.recipieImage.context).load(recipe.image).into(holder.binding.recipieImage)
-        holder.binding.root.setOnClickListener {
-            onItemClick(recipe)
-        }
+        holder.binding.root.setOnClickListener { onItemClick(recipe) }
         holder.binding.saveRecipeBtn.setImageResource(
             if (recipe.isSaved) R.drawable.bookmark_filled else R.drawable.save_img
         )

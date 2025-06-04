@@ -2,6 +2,7 @@ package com.martin_dev.sugarit.views.recipie
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
@@ -24,23 +25,18 @@ class RecipieActivity : AppCompatActivity() {
             override fun handleOnBackPressed() {
                 startActivity(Intent(this@RecipieActivity, MenuActivity::class.java))
             } })
-        binding.clearSelectedBtn.visibility = View.GONE
         initListeners()
     }
 
     private fun initListeners() {
         binding.sendBtn.setOnClickListener {
-            AlertMessage().createAlert("alergiesInfo", this) { inputUser ->
-                val alergies: String = inputUser
-                val ingredients = selectedIngredients.joinToString(",")
+                val ingredients = binding.ingredients.text.toString()
                 val intent = Intent(this, RecipieResultActivity::class.java)
                 TranslaterSpToEn().translate(ingredients) { translatedText ->
                     intent.putExtra("ingredients", translatedText.toString())
-                    intent.putExtra("alergies", alergies)
                     startActivity(intent)
                 }
-            }
-
         }
+
     }
 }

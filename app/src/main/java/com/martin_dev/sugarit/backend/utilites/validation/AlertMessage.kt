@@ -8,25 +8,13 @@ import com.martin_dev.sugarit.backend.utilites.traductions.TranslaterSpToEn
 
 class AlertMessage
 {
-    fun createAlert(reason: String, context: Context, inputUser: ((String) -> (Unit))? = null)
+    fun createAlert(reason: String, context: Context)
     {
         val builder = AlertDialog.Builder(context)
         val message = specificMessage(reason)
         builder.setTitle("Error")
         builder.setMessage(message)
-        if (reason == "alergiesInfo")
-        {
-            builder.setTitle("Introduce tus alérgenos")
-            val input = EditText(context)
-            builder.setView(input)
-            builder.setPositiveButton("Aceptar"){_,_ ->
-                TranslaterSpToEn().translate(input.text.toString()) { translatedText ->
-                    inputUser?.invoke(translatedText.toString())
-                }
-            }
-        }
-        else
-            builder.setPositiveButton("Aceptar",null)
+        builder.setPositiveButton("Aceptar",null)
         showAlert(builder.create())
     }
 
