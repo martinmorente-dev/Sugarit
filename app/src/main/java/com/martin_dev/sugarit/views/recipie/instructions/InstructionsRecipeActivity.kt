@@ -1,5 +1,6 @@
 package com.martin_dev.sugarit.views.recipie.instructions
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.*
 import android.os.Bundle
@@ -46,6 +47,7 @@ class InstructionsRecipeActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun drawRecipe(recipe: RecipeInstructionResponse) {
         binding.title.text = intent.getStringExtra("recipeName")
         Glide.with(this)
@@ -54,7 +56,7 @@ class InstructionsRecipeActivity : AppCompatActivity() {
 
         val minutes = recipe.cookingMinutes?.takeIf { it > 0 }
             ?: recipe.readyInMinutes?.takeIf { it > 0 }
-        binding.time.text = "${minutes?.toString()} min" ?: "N/A"
+        binding.time.text = "${minutes?.toString()} min"
 
         binding.recipeIngredients.text = ""
         var counter = 1
