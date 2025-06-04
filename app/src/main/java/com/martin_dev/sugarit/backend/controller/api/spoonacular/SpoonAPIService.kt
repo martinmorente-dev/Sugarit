@@ -17,7 +17,7 @@ interface SpoonAPIService {
     suspend fun getRecipeByIngredient(
         @Query("ingredients") ingredients: String,
         @Query("apiKey") apiKey: String = BuildConfig.API_KEY,
-        @Query("number") number: Int = 10,
+        @Query("number") number: Int = 1,
         @Query("ranking") ranking: Int = 1,
     ):Response<List<RecipeResponse>>
 

@@ -6,10 +6,13 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.martin_dev.sugarit.backend.controller.food.FoodViewModel
 import com.martin_dev.sugarit.backend.utilites.traductions.TranslaterEnToSp
 import com.martin_dev.sugarit.databinding.ActivityItemCameraResultBinding
 import kotlin.math.roundToInt
+import androidx.core.net.toUri
+import com.martin_dev.sugarit.views.utils.observeOnce
 
 class ItemCameraResultActivity : AppCompatActivity() {
     private lateinit var binding: ActivityItemCameraResultBinding
@@ -25,12 +28,10 @@ class ItemCameraResultActivity : AppCompatActivity() {
 
         translater = TranslaterEnToSp()
 
-        // Obtener datos del intent
         val foodId = intent.getIntExtra("food_id", -1)
         val foodQuantity = intent.getIntExtra("food_quantity", 1)
         val foodName = intent.getStringExtra("food_name") ?: ""
 
-        // Traducir nombre del alimento
         translateFoodName(foodName)
 
         val viewModel = ViewModelProvider(this)[FoodViewModel::class.java]
@@ -38,16 +39,16 @@ class ItemCameraResultActivity : AppCompatActivity() {
         if (foodId != -1 && foodId != 0) {
             Log.i("ID_FOOD","$foodId")
             viewModel.fetchFoodNutrition(foodId, foodQuantity)
-            viewModel.nutrition.observe(this) { nutrition ->
+            viewModel.nutrition.observeOnce (this) { nutrition ->
                 nutrition?.nutrients?.let { nutrients ->
                     translateNutrients(nutrients)
                 } ?: run {
                     binding.nutrients.text = "No hay datos nutricionales"
                 }
             }
-        } else {
-            binding.nutrients.text = "Error: ID no válido"
         }
+        else
+            binding.nutrients.text = "Error: ID no válido"
         putImage()
     }
 
@@ -81,19 +82,15 @@ class ItemCameraResultActivity : AppCompatActivity() {
         }
     }
 
-
     private fun putImage() {
         val imageUriString = intent.getStringExtra("image_uri")
         if (imageUriString != null) {
-            val uri = Uri.parse(imageUriString)
+            val uri = imageUriString.toUri()
             Glide.with(this)
                 .load(uri)
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(binding.foodRecipieImage)
         }
-    }
-
-    override fun onDestroy()
-    {
-        super.onDestroy()
     }
 }

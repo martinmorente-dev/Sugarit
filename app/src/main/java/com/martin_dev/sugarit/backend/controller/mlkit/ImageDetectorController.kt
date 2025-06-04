@@ -1,7 +1,6 @@
 package com.martin_dev.sugarit.backend.controller.mlkit
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import androidx.core.content.FileProvider
@@ -17,12 +16,10 @@ class ImageDetectorController(
     private val context: Context
 ) {
     private val image = InputImage.fromBitmap(imageSended, 0)
-
     private val options = ObjectDetectorOptions.Builder()
         .setDetectorMode(ObjectDetectorOptions.SINGLE_IMAGE_MODE)
         .enableClassification()
         .build()
-
     private val objectDetector = ObjectDetection.getClient(options)
 
     fun recognizeFood() {
@@ -34,13 +31,10 @@ class ImageDetectorController(
             for (detectedObject in detectedObjects) {
                 if (detectedObject.labels.isNotEmpty()) {
                     val label = detectedObject.labels.first()
-                    if (label.text == "Food") {
-                        val confidence = label.confidence
-                        if (confidence > 0.7f) {
-                            saveBitmapToCache()
-                            (context as? FoodActivity)?.let { activity ->
-                                activity.onPhotoTaken()
-                            }
+                    if (label.text == "Food" && label.confidence > 0.7f) {
+                        saveBitmapToCache()
+                        (context as? FoodActivity)?.let { activity ->
+                            activity.onPhotoTaken()
                         }
                     } else {
                         AlertMessage().createAlert("No food detected", context)
@@ -54,6 +48,7 @@ class ImageDetectorController(
 
     private fun saveBitmapToCache(): Uri {
         val cachePath = File(context.cacheDir, "images")
+        cachePath.deleteRecursively()
         cachePath.mkdirs()
         val file = File(cachePath, "image.jpg")
         val stream = file.outputStream()
@@ -61,6 +56,7 @@ class ImageDetectorController(
         stream.close()
         return FileProvider.getUriForFile(
             context,
-            "${context.packageName}.fileprovider", file)
+            "${context.packageName}.fileprovider", file
+        )
     }
 }
