@@ -11,7 +11,6 @@
     <string name="user_passowrd">contraseña:</string>
     <string name="registration">Registrame</string>
 
-
     <!-- Food -->
 
     <string name="text_food">¡ Prueba a hacer una foto a tu comida !</string>
@@ -21,7 +20,7 @@
     <!-- Recipe -->
     <string name="fridge_txt">¿Qué hay en la nevera?</string>
     <string name="ingredient_txt">Ejemplo: Arroz, Lechuga, Tomate</string>
-    <string name="save_recipe_btn">Guardar Receta</string>
+    <string name="save_recipe_btn">Icono para guardar receta</string>
 
     <!-- Email Verification -->
     <string name="description_txt">Te enviamos un email de verificación por favor revisa tu bandeja de entrada</string>
@@ -34,12 +33,23 @@
     <string name="camera_context">Imagen para encender la cámara del móvil y escanear la comida</string>
     <string name="fridge_context">Imagen nevera</string>
     <string name="marshmallow">Imagen de un malvavisco esperando alégremente</string>
+    <string name="marshmallowChef">Imagen Malvavisco</string>
+    <string name="backBtn">Botón para ir hacia atrás</string>
 
     <!-- Item Recipie Save-->
     <string name="erase_btn">Eliminar</string>
 
+    <!-- Instructions Recipie -->
+    <string name="image_context">Imagen de la receta</string>
+    <string name="ingredients">Ingredientes</string>
+    <string name="steps">Pasos</string>
+
 
     <!--Activity Result-->
     <string name="btn_user_recipies">Mis Recetas</string>
+    <string name="clear_selection">Botón para eliminar los seleccionados</string>
+    <string name="selected">Seleccionados: </string>
+    <string name="no_response">No se encontraron recetas</string>
+    <string name="marsmallow_error">Marsmallow image with xx indicating there is no results</string>
 
 </resources>

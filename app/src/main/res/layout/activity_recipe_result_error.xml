@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.recipie.recycler.RecipeResultErrorActivity"
+    android:orientation="vertical">
+
+
+    <ImageButton
+        android:id="@+id/backBtn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/fui_transparent"
+        android:backgroundTint="@color/none"
+        android:contentDescription="@string/backBtn"
+        android:src="@drawable/go_back"
+        android:layout_gravity="top"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/no_response"
+        android:textColor="@color/black"
+        android:textSize="25sp" />
+
+    <ImageView
+        android:layout_margin="20sp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:contentDescription="@string/marsmallow_error"
+        android:src="@drawable/marshmello_without_load"
+        />
+
+</LinearLayout>

@@ -8,25 +8,13 @@ import com.martin_dev.sugarit.backend.utilites.traductions.TranslaterSpToEn
 
 class AlertMessage
 {
-    fun createAlert(reason: String, context: Context, inputUser: ((String) -> (Unit))? = null)
+    fun createAlert(reason: String, context: Context)
     {
         val builder = AlertDialog.Builder(context)
         val message = specificMessage(reason)
         builder.setTitle("Error")
         builder.setMessage(message)
-        if (reason == "alergiesInfo")
-        {
-            builder.setTitle("Introduce tus alérgenos")
-            val input = EditText(context)
-            builder.setView(input)
-            builder.setPositiveButton("Aceptar"){_,_ ->
-                TranslaterSpToEn().translate(input.text.toString()) { translatedText ->
-                    inputUser?.invoke(translatedText.toString())
-                }
-            }
-        }
-        else
-            builder.setPositiveButton("Aceptar",null)
+        builder.setPositiveButton("Aceptar",null)
         showAlert(builder.create())
     }
 
@@ -45,7 +33,6 @@ class AlertMessage
             "Malformed password Digit" -> message = "La contraseña debe tener al menos un digito"
             "Malformed password Special Char" -> message = "La contraseña tiene que tener caracteres especiales"
             "Email not sended" -> message = "Ahora mismo no se pudo enviar el correo de verificación inténtelo más tarde"
-            "No url found" -> message = "La receta que busca no está disponible en este momento"
             "No food detected" -> message = "No se ha detectado ningún alimento en la foto"
             "Wrong answer" -> message = "Tienes que introducir si la foto es una comida o receta"
             "Image not detected" -> message = "No se detecto ningun alimento o receta por favor asegurese que la foto es la deseada"

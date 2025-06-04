@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="clear_selection">Botón para eliminar los seleccionados</string>
+    <string name="no_response">No se encontraron recetas</string>
+</resources>

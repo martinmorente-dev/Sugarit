@@ -3,17 +3,17 @@ package com.martin_dev.sugarit.views.recipie.recycler.recipie_saved
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.RecipieSponnacular
+import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.Recipe
 import com.martin_dev.sugarit.databinding.ActivityItemRecipieSaveBinding
 
 class RecipieUserAdapter(
-    private val onDeleteClickListener: (RecipieSponnacular) -> Unit,
-    private val onItemClick: (RecipieSponnacular) -> Unit
+    private val onDeleteClickListener: (Recipe) -> Unit,
+    private val onItemClick: (Recipe) -> Unit
 ) : RecyclerView.Adapter<RecipieUserViewHolder>() {
 
-    private val recipes = mutableListOf<RecipieSponnacular>()
+    private val recipes = mutableListOf<Recipe>()
 
-    fun setRecipies(newRecipies: List<RecipieSponnacular>) {
+    fun setRecipies(newRecipies: List<Recipe>) {
         recipes.clear()
         recipes.addAll(newRecipies)
         notifyDataSetChanged()
@@ -30,3 +30,4 @@ class RecipieUserAdapter(
 
     override fun getItemCount(): Int = recipes.size
 }
+

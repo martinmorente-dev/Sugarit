@@ -14,19 +14,18 @@ class TranslaterEnToSp
 
     private val translator = Translation.getClient(options)
 
-    fun translate(message: String, onResult: ((String?) -> Unit)) {
+    fun translate(message: String, onResult: (String?) -> Unit) {
         translator.downloadModelIfNeeded().addOnSuccessListener {
-            Log.i("Translater Download", "Model downloaded")
             translator.translate(message).addOnSuccessListener { translatedText ->
-                Log.i("Success Translater","Tanslated text: $translatedText")
                 onResult(translatedText)
             }.addOnFailureListener { exception ->
-                Log.e("Error Translate"," error: ${exception.message}")
+                Log.e("Error Translate", " error: ${exception.message}")
                 onResult(message)
             }
         }.addOnFailureListener { exception ->
-            Log.e("Translater Error Download"," error: ${exception.message}")
+            Log.e("Translater Error Download", " error: ${exception.message}")
             onResult(message)
         }
     }
+
 }

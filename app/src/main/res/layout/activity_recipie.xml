@@ -39,11 +39,11 @@
         app:layout_constraintVertical_bias="0.055" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/userIngredients"
+        android:id="@+id/containerRecipes"
         android:layout_width="300dp"
         android:layout_height="160dp"
         app:boxBackgroundMode="outline"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/sendBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,6 +51,7 @@
         app:layout_constraintVertical_bias="0.104">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ingredients"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:backgroundTint="#00FFFFFF"
@@ -72,7 +73,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userIngredients"
-        app:layout_constraintVertical_bias="0.129" />
+        app:layout_constraintTop_toBottomOf="@+id/containerRecipes"
+        app:layout_constraintVertical_bias="0.120" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
