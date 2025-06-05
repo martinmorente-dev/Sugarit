@@ -59,37 +59,10 @@ SugarIt/<br>
 
 ## Installation
 
-1. **Clone the repository:**
-git clone https://github.com/martinmorente-dev/Sugarit.git
+1. **Go to this url and follow the steps:**
+https://github.com/martinmorente-dev/SugarItApk
 
-text
-2. **Open in Android Studio:**
-- Open Android Studio.
-- Select "Open an existing project" and choose the cloned directory.
-3. **Build the project:**
-- Ensure you have the required SDK (Android 8.0 or higher).
-- Sync Gradle and resolve dependencies.
-4. **Run the app:**
-- Connect an Android device or use an emulator.
-- Click "Run" to install and launch the app.
 
----
-
-## Configuration
-
-- **API Keys:**  
-Add your Spoonacular API key in the appropriate configuration file (e.g., `local.properties` or a dedicated config file as specified in the code).
-- **Permissions:**  
-The app requests camera and storage permissions at runtime.
-
----
-
-## Usage
-
-- Open the app and grant necessary permissions.
-- Use the main screen to scan food labels.
-- View recognized ingredients and nutritional information.
----
 
 ## Technical Details
 
