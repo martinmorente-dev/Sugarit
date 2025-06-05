@@ -1,17 +1,17 @@
 package com.martin_dev.sugarit.views.food
 
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.martin_dev.sugarit.backend.controller.food.FoodViewModel
+import com.martin_dev.sugarit.backend.viewmodels.food.FoodViewModel
 import com.martin_dev.sugarit.backend.utilites.traductions.TranslaterEnToSp
 import com.martin_dev.sugarit.databinding.ActivityItemCameraResultBinding
 import kotlin.math.roundToInt
 import androidx.core.net.toUri
+import com.martin_dev.sugarit.backend.model.api.Spoonacular.camera.ingredient.Nutrient
 import com.martin_dev.sugarit.views.utils.observeOnce
 
 class ItemCameraResultActivity : AppCompatActivity() {
@@ -59,7 +59,7 @@ class ItemCameraResultActivity : AppCompatActivity() {
         }
     }
 
-    private fun translateNutrients(nutrients: List<com.martin_dev.sugarit.backend.model.api.Spoonacular.food.Nutrient>) {
+    private fun translateNutrients(nutrients: List<Nutrient>) {
         val translatedNutrients = mutableListOf<String>()
         pendingTranslations.clear()
         completedTranslations = 0

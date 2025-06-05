@@ -31,14 +31,14 @@ class ImageDetectorController(
             for (detectedObject in detectedObjects) {
                 if (detectedObject.labels.isNotEmpty()) {
                     val label = detectedObject.labels.first()
-                    if (label.text == "Food" && label.confidence > 0.7f) {
+                    if (label.text == "Food" && label.confidence > 0.7f)
+                    {
                         saveBitmapToCache()
                         (context as? FoodActivity)?.let { activity ->
                             activity.onPhotoTaken()
                         }
-                    } else {
-                        AlertMessage().createAlert("No food detected", context)
-                    }
+                    } else
+                        AlertMessage().createAlert("Image not detected", context)
                 } else {
                     AlertMessage().createAlert("Image not detected", context)
                 }

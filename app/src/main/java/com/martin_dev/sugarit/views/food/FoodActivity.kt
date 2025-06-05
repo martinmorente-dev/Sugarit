@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
 import com.martin_dev.sugarit.backend.controller.food.FoodController
-import com.martin_dev.sugarit.backend.controller.food.FoodViewModel
+import com.martin_dev.sugarit.backend.viewmodels.food.FoodViewModel
 import com.martin_dev.sugarit.backend.utilites.alert_prompt.AlertPrompt
 import com.martin_dev.sugarit.databinding.ActivityFoodBinding
 import java.io.File
@@ -41,7 +41,7 @@ class FoodActivity : AppCompatActivity() {
 
     fun onPhotoTaken() {
         alertPrompt.createAlertPrompt("Recipe or Food", this) { foodOrRecipe ->
-            if (foodOrRecipe == "meal") {
+            if (foodOrRecipe.equals("ingredient", ignoreCase = true)) {
                 alertPrompt.createAlertPrompt("Food type", this) { foodType ->
                     alertPrompt.createAlertPrompt("Food quantity", this) { foodQuantity ->
                         imageUri = getImage()
@@ -58,6 +58,25 @@ class FoodActivity : AppCompatActivity() {
                                 startActivity(intent)
                             }
                         }
+                    }
+                }
+            }
+            else if (foodOrRecipe.equals("recipe", ignoreCase = true))
+            {
+                alertPrompt.createAlertPrompt("Recipe Type", this){ recipeType ->
+                    imageUri = getImage()
+                    viewModel.fetchRecipeNutrition(recipeType)
+                    viewModel.recipeName.observe(this) { recipe ->
+                        val carbList = ArrayList(recipe?.confidenceRange95Percent ?: emptyList())
+                        recipe?.let{
+                            val intent = Intent(this, RecipeNutritionActivity::class.java).apply {
+                                putExtra("recipe_name", recipe.unit)
+                                putParcelableArrayListExtra("carbs", carbList)
+                                putExtra("image_uri", imageUri.toString())
+                            }
+                            startActivity(intent)
+                        }
+
                     }
                 }
             }

@@ -1,8 +1,9 @@
 package com.martin_dev.sugarit.backend.controller.api.spoonacular
 
 import com.martin_dev.sugarit.BuildConfig
-import com.martin_dev.sugarit.backend.model.api.Spoonacular.food.FoodResponse
-import com.martin_dev.sugarit.backend.model.api.Spoonacular.food.NutritionResponse
+import com.martin_dev.sugarit.backend.model.api.Spoonacular.camera.ingredient.FoodResponse
+import com.martin_dev.sugarit.backend.model.api.Spoonacular.camera.ingredient.NutritionResponse
+import com.martin_dev.sugarit.backend.model.api.Spoonacular.camera.recipe.RecipeNameResponse
 import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.RecipeResponse
 import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.instructions.RecipeInstructionResponse
 import com.martin_dev.sugarit.backend.model.api.Spoonacular.recipies.nutrition.DetailedRecipe
@@ -48,4 +49,11 @@ interface SpoonAPIService {
         @Path("id") recipeId: Int,
         @Query("apiKey") apiKey: String = BuildConfig.API_KEY
     ): Response<RecipeInstructionResponse>
+
+    @GET("recipes/guessNutrition")
+    suspend fun getRecipeByName(
+        @Query("title") title: String,
+        @Query("apiKey") apiKey: String = BuildConfig.API_KEY
+    ):Response<RecipeNameResponse>
+
 }

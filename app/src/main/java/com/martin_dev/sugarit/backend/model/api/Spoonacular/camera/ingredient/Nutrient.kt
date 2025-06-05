@@ -1,4 +1,4 @@
-package com.martin_dev.sugarit.backend.model.api.Spoonacular.food
+package com.martin_dev.sugarit.backend.model.api.Spoonacular.camera.ingredient
 
 data class Nutrient(
     val name: String,
