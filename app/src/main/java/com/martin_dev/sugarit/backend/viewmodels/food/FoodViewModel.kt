@@ -38,7 +38,6 @@ class FoodViewModel : ViewModel() {
         viewModelScope.launch {
             val carbs = FoodRepositorySingleton.repositoryFood.getRecipeName(name)
             _recipeName.postValue(carbs)
-            Log.i("FLOWFood", "Respuesta de fetchRecipeNutrition: $carbs")
         }
     }
 

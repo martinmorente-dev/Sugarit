@@ -6,6 +6,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import coil.load
 import com.martin_dev.sugarit.backend.model.api.Spoonacular.camera.recipe.ConfidenceRange95Percent
+import com.martin_dev.sugarit.backend.utilites.traductions.LibraryTraductions
 import com.martin_dev.sugarit.backend.utilites.traductions.TranslaterEnToSp
 import com.martin_dev.sugarit.databinding.ActivityRecipeNutritionBinding
 
@@ -46,10 +47,15 @@ class RecipeNutritionActivity : AppCompatActivity() {
         if(recipeName.isNotEmpty()) translateRecipeName(recipeName){ translated -> binding.title.text = translated} else recipeName
     }
 
-    private fun translateRecipeName(recipeName: String, name: (String) -> Unit){
+    private fun translateRecipeName(recipeName: String, name: (String) -> Unit)
+    {
         val translator = TranslaterEnToSp()
-        translator.translate(recipeName) { translatedText ->
-            name(translatedText ?: recipeName)
+        if(LibraryTraductions().translations.containsKey(recipeName))
+            name(LibraryTraductions().translations[recipeName]!!)
+        else {
+            translator.translate(recipeName) { translatedText ->
+                name(translatedText ?: recipeName)
+            }
         }
     }
 }

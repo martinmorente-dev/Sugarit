@@ -65,8 +65,6 @@ class FoodActivity : AppCompatActivity() {
             {
                 alertPrompt.createAlertPrompt("Recipe Type", this){ recipeType ->
                     imageUri = getImage()
-                    Log.i("IMAGE_URI","$imageUri")
-                    Log.i("FLOWFood", "Antes de llamar al fetchRecipeNutrition")
                     viewModel.fetchRecipeNutrition(recipeType)
                     viewModel.recipeName.observe(this) { recipe ->
                         recipe?.let{
