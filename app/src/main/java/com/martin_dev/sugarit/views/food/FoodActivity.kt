@@ -65,13 +65,18 @@ class FoodActivity : AppCompatActivity() {
             {
                 alertPrompt.createAlertPrompt("Recipe Type", this){ recipeType ->
                     imageUri = getImage()
+                    Log.i("IMAGE_URI","$imageUri")
+                    Log.i("FLOWFood", "Antes de llamar al fetchRecipeNutrition")
                     viewModel.fetchRecipeNutrition(recipeType)
                     viewModel.recipeName.observe(this) { recipe ->
-                        val carbList = ArrayList(recipe?.confidenceRange95Percent ?: emptyList())
                         recipe?.let{
+                            val carbMax = recipe.confidenceRange95Percent.max
+                            val carbUnit = recipe.unit
+
                             val intent = Intent(this, RecipeNutritionActivity::class.java).apply {
-                                putExtra("recipe_name", recipe.unit)
-                                putParcelableArrayListExtra("carbs", carbList)
+                                putExtra("recipe_name", recipeType)
+                                putExtra("carbsMax", carbMax)
+                                putExtra("carbsUnit", carbUnit)
                                 putExtra("image_uri", imageUri.toString())
                             }
                             startActivity(intent)

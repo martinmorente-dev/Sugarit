@@ -1,5 +1,6 @@
 package com.martin_dev.sugarit.backend.viewmodels.food
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,7 +18,7 @@ class FoodViewModel : ViewModel() {
     private val _nutrition = MutableLiveData<Nutrition>()
     val nutrition: LiveData<Nutrition?> = _nutrition
 
-    private val _recipeName = MutableLiveData<Carbs>()
+    private val _recipeName = MutableLiveData<Carbs?>()
     val recipeName: LiveData<Carbs?> = _recipeName
 
     fun searchFood(query: String) {
@@ -35,7 +36,9 @@ class FoodViewModel : ViewModel() {
 
     fun fetchRecipeNutrition(name: String) {
         viewModelScope.launch {
-            _recipeName.postValue(FoodRepositorySingleton.repositoryFood.getRecipeName(name))
+            val carbs = FoodRepositorySingleton.repositoryFood.getRecipeName(name)
+            _recipeName.postValue(carbs)
+            Log.i("FLOWFood", "Respuesta de fetchRecipeNutrition: $carbs")
         }
     }
 

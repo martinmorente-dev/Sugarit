@@ -6,5 +6,5 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Carbs(
     val unit: String,
-    val confidenceRange95Percent: List<ConfidenceRange95Percent>
+    val confidenceRange95Percent: ConfidenceRange95Percent
 ): Parcelable

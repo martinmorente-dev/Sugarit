@@ -33,6 +33,7 @@ class AlertPrompt()
             "Food type" -> hint = "Ejemplo: Limon"
             "Food quantity" -> hint = "Ejemplo: 2"
             "Food or recipe" -> hint = "Ejemplo: comida o receta"
+            "Recipe Type" -> hint = "Ejemplo: Espaguetis"
         }
         return (hint)
     }
@@ -44,6 +45,7 @@ class AlertPrompt()
             "Food type" -> title = "Introduce que tipo de comida es la foto"
             "Food quantity" -> title = "Introduce la cantidad de alimentos que hay en la foto"
             "Recipe or Food" -> title = "¿Es un ingrediente o receta lo que hay en la foto?"
+            "Recipe Type" -> title = "Introduce el tipo de receta"
         }
         return (title)
     }

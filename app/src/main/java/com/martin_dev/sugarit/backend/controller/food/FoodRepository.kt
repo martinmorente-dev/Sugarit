@@ -33,9 +33,19 @@ class FoodRepository(private val api: SpoonAPIService) {
     }
 
     suspend fun getRecipeName(recipeName: String): Carbs? {
-        val response = api.getRecipeByName(recipeName)
-        return if (response.isSuccessful) {
-            response.body()?.carbs?.firstOrNull()
-        } else null
+        try {
+            val response = api.getRecipeByName(recipeName)
+            Log.i("FLOWFood", "Respuesta de la API: ${response.code()} - ${response.body()}")
+            if (!response.isSuccessful) {
+                Log.e("API_ERROR", "Error en getRecipeName: ${response.errorBody()?.string()}")
+            }
+            return if (response.isSuccessful) {
+                response.body()?.carbs
+            } else null
+        } catch (e: Exception) {
+            Log.e("FLOWFood", "Excepción en getRecipeName: $e")
+            return null
+        }
     }
+
 }
