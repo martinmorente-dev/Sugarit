@@ -32,7 +32,7 @@ class ImageDetectorController(
             for (detectedObject in detectedObjects) {
                 if (detectedObject.labels.isNotEmpty()) {
                     val label = detectedObject.labels.first()
-                    if (label.text == "Food" && label.confidence > 0.7f)
+                    if (label.text == "Food" && label.confidence > 0.5f)
                     {
                         saveBitmapToCache()
                         (context as? FoodActivity)?.let { activity ->

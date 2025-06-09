@@ -7,7 +7,7 @@
     <!-- Login -->
 
     <string name="entry">Entrar</string>
-    <string name="username">usuario:</string>
+    <string name="username">email: hola@gmail.com</string>
     <string name="user_passowrd">contraseña:</string>
     <string name="registration">Registrame</string>
 

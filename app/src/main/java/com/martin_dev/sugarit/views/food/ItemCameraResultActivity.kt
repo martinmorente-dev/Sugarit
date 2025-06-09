@@ -12,6 +12,7 @@ import com.martin_dev.sugarit.databinding.ActivityItemCameraResultBinding
 import kotlin.math.roundToInt
 import androidx.core.net.toUri
 import com.martin_dev.sugarit.backend.model.api.Spoonacular.camera.ingredient.Nutrient
+import com.martin_dev.sugarit.backend.utilites.traductions.LibraryTraductions
 import com.martin_dev.sugarit.views.utils.observeOnce
 
 class ItemCameraResultActivity : AppCompatActivity() {
@@ -53,9 +54,17 @@ class ItemCameraResultActivity : AppCompatActivity() {
     }
 
     private fun translateFoodName(originalName: String) {
-        translater.translate(originalName) { translated ->
-            translatedFoodName = translated ?: originalName
+        val translations = LibraryTraductions().translations
+        val translatedDirect = translations[originalName]
+        Log.i("NAME", originalName)
+        if (translatedDirect != null) {
+            translatedFoodName = translatedDirect
             binding.title.text = translatedFoodName
+        } else {
+            translater.translate(originalName) { translated ->
+                translatedFoodName = translated ?: originalName
+                binding.title.text = translatedFoodName
+            }
         }
     }
 

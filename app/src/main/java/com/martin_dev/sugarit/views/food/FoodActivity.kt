@@ -50,7 +50,7 @@ class FoodActivity : AppCompatActivity() {
                         viewModel.food.observe(this) { food ->
                             food?.let {
                                 val intent = Intent(this, ItemCameraResultActivity::class.java).apply {
-                                    putExtra("food_name", it.name)
+                                    putExtra("food_name", foodType)
                                     putExtra("image_uri", imageUri.toString())
                                     putExtra("food_id", it.id)
                                     putExtra("food_quantity", lastFoodQuantity)
