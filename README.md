@@ -16,8 +16,6 @@
 - [Security Policy](#security-policy)
 - [Backup Policy](#backup-policy)
 - [Contributing](#contributing)
-- [License](#license)
-
 ---
 
 ## Project Overview
