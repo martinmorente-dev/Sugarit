@@ -2,7 +2,11 @@ package com.martin_dev.sugarit.backend.controller.registration
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthInvalidUserException
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.martin_dev.sugarit.backend.utilites.user.UserBasics
 import com.martin_dev.sugarit.backend.utilites.validation.AlertMessage
 import com.martin_dev.sugarit.views.components.toast.ToastComponent
@@ -23,7 +27,11 @@ class RegistrationController()
     fun registration()
     {
         auth = FirebaseAuth.getInstance()
-
+        if(userBasics.email.isEmpty() || userBasics.password.isEmpty())
+        {
+            AlertMessage().createAlert("Empty email or password", this.context)
+            return
+        }
         if (!isRegistered(this.userBasics.email.toString(),this.userBasics.password.toString()))
         {
             auth.createUserWithEmailAndPassword(this.userBasics.email.toString(), this.userBasics.password.toString()).addOnCompleteListener {
@@ -43,19 +51,38 @@ class RegistrationController()
                             else
                             {
                                 AlertMessage().createAlert("Email not sended", this.context)
-                                auth.signOut()
+                                FirebaseAuth.getInstance().currentUser?.delete()
                             }
                         }
                     }
                     else
-                        AlertMessage().createAlert("Registration Failed", this.context)
+                    {
+                        val exception = it.exception
+                        when(exception)
+                        {
+                            is FirebaseAuthInvalidUserException -> AlertMessage().createAlert("Invalid email", this.context)
+                            is FirebaseAuthWeakPasswordException -> AlertMessage().createAlert("Weak password", this.context)
+                            is FirebaseAuthInvalidCredentialsException -> AlertMessage().createAlert("Invalid email", this.context)
+                            else ->
+                            {
+                                val message = exception?.message ?: ""
+                                if(message.contains("PASSWORD_DOES_NOT_MEET_REQUIREMENTS"))
+                                    AlertMessage().createAlert("Weak password", this.context)
+                                else
+                                {
+                                    AlertMessage().createAlert("Unknown error", this.context)
+                                    return@addOnCompleteListener
+                                }
+                            }
+                        }
+                    }
             }
         }
         else
             AlertMessage().createAlert("This user exist", this.context)
     }
 
-    fun isRegistered(email: String, password: String): Boolean
+    private fun isRegistered(email: String, password: String): Boolean
     {
         var comprobation: Boolean = false
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
