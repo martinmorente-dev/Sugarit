@@ -23,31 +23,36 @@ class ImageDetectorController(
         .build()
     private val objectDetector = ObjectDetection.getClient(options)
 
-    fun recognizeFood() {
+    fun recognizeFood()
+    {
         objectDetector.process(image).addOnSuccessListener { detectedObjects ->
-            if (detectedObjects.isEmpty()) {
+            if (detectedObjects.isEmpty())
+            {
                 AlertMessage().createAlert("Image not detected", context)
                 return@addOnSuccessListener
             }
-            for (detectedObject in detectedObjects) {
-                if (detectedObject.labels.isNotEmpty()) {
+            for (detectedObject in detectedObjects)
+            {
+                if (detectedObject.labels.isNotEmpty())
+                {
                     val label = detectedObject.labels.first()
+                    Log.i("ImageDetectorController", "Label: ${label.text}")
                     if (label.text == "Food" && label.confidence > 0.5f)
                     {
                         saveBitmapToCache()
-                        (context as? FoodActivity)?.let { activity ->
-                            activity.onPhotoTaken()
-                        }
-                    } else
+                        (context as? FoodActivity)?.onPhotoTaken()
+                    }
+                    else
                         AlertMessage().createAlert("Image not detected", context)
-                } else {
-                    AlertMessage().createAlert("Image not detected", context)
                 }
+                else
+                    AlertMessage().createAlert("Image not detected", context)
             }
         }
     }
 
-    private fun saveBitmapToCache(): Uri {
+    private fun saveBitmapToCache(): Uri
+    {
         val cachePath = File(context.cacheDir, "images")
         cachePath.deleteRecursively()
         cachePath.mkdirs()
