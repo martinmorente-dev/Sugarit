@@ -10,18 +10,15 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.martin_dev.sugarit.backend.controller.mlkit.ImageDetectorController
 import com.martin_dev.sugarit.backend.utilites.validation.AlertMessage
+import java.io.File
 
-
-class FoodController(private val activity: AppCompatActivity)
-{
+class FoodController(private val activity: AppCompatActivity) {
     private lateinit var cameraPermission: ActivityResultLauncher<String>
     private lateinit var cameraLauncher: ActivityResultLauncher<Intent>
-    private val CAMERA_PERMISSON = Manifest.permission.CAMERA
+    private val CAMERA_PERMISSION = Manifest.permission.CAMERA
 
-
-    fun requestPermissionLauncher()
-    {
-        cameraPermission = activity.registerForActivityResult(ActivityResultContracts.RequestPermission()){ isGranted ->
+    fun requestPermissionLauncher() {
+        cameraPermission = activity.registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) openCamera()
             else AlertMessage().createAlert("Permission not granted", activity)
         }
@@ -30,27 +27,24 @@ class FoodController(private val activity: AppCompatActivity)
             val data = result.data
             val extras = data?.extras
             val bitmap = extras?.get("data") as? Bitmap
-            if(bitmap != null) {
+            if (bitmap != null) {
                 ImageDetectorController(bitmap, activity).recognizeFood()
-            }
-            else
+            } else {
                 Toast.makeText(activity, "No se pudo obtener la imagen", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
-    fun requestPermission()
-    {
-        cameraPermission.launch(CAMERA_PERMISSON)
+    fun requestPermission() {
+        cameraPermission.launch(CAMERA_PERMISSION)
     }
 
-    private fun openCamera()
-    {
+    private fun openCamera() {
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-
         if (takePictureIntent.resolveActivity(activity.packageManager) != null) {
             cameraLauncher.launch(takePictureIntent)
-        }
-        else
+        } else {
             Toast.makeText(activity, "Unable to open camera", Toast.LENGTH_SHORT).show()
+        }
     }
 }

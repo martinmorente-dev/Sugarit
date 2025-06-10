@@ -5,6 +5,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("com.google.gms.google-services")
     kotlin("kapt")
+    id("kotlin-parcelize")
+
 }
     val localProperties = Properties().apply {
         load(rootProject.file("local.properties").inputStream())

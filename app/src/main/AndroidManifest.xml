@@ -20,6 +20,9 @@
         android:theme="@style/Theme.Sugarit"
         tools:targetApi="31">
         <activity
+            android:name=".views.food.RecipeNutritionActivity"
+            android:exported="false" />
+        <activity
             android:name=".views.recipie.recycler.RecipeResultErrorActivity"
             android:exported="false" />
         <activity

@@ -2,8 +2,9 @@ package com.martin_dev.sugarit.backend.controller.food
 
 import android.util.Log
 import com.martin_dev.sugarit.backend.controller.api.spoonacular.SpoonAPIService
-import com.martin_dev.sugarit.backend.model.api.Spoonacular.food.Food
-import com.martin_dev.sugarit.backend.model.api.Spoonacular.food.Nutrition
+import com.martin_dev.sugarit.backend.model.api.Spoonacular.camera.ingredient.Food
+import com.martin_dev.sugarit.backend.model.api.Spoonacular.camera.ingredient.Nutrition
+import com.martin_dev.sugarit.backend.model.api.Spoonacular.camera.recipe.Carbs
 
 class FoodRepository(private val api: SpoonAPIService) {
 
@@ -30,4 +31,19 @@ class FoodRepository(private val api: SpoonAPIService) {
             } else null
         } else null
     }
+
+    suspend fun getRecipeName(recipeName: String): Carbs? {
+        try {
+            val response = api.getRecipeByName(recipeName)
+            if (!response.isSuccessful)
+                Log.e("API_ERROR", "Error en getRecipeName: ${response.errorBody()?.string()}")
+            return if (response.isSuccessful)
+                response.body()?.carbs
+            else null
+        } catch (e: Exception) {
+            Log.e("FLOWFood", "Excepción en getRecipeName: $e")
+            return null
+        }
+    }
+
 }

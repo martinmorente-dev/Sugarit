@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.widget.EditText
 import com.martin_dev.sugarit.backend.utilites.traductions.TranslaterSpToEn
+import android.util.Log
 
 
 class AlertPrompt()
@@ -15,12 +16,13 @@ class AlertPrompt()
         val title = specificTitle(reason)
         val input = EditText(context)
         builder.setTitle(title)
-        input.setHint(specificHint(reason))
+        input.hint = specificHint(reason)
         builder.setView(input)
         builder.setView(input)
         builder.setPositiveButton("Aceptar") { _, _ ->
             TranslaterSpToEn().translate(input.text.toString()) { translatedText ->
-                inputUser?.invoke(translatedText.toString())
+                val safeText = translatedText?.takeIf { it.isNotBlank() } ?: input.text.toString()
+                inputUser?.invoke(safeText)
             }
         }
         showAlert(builder.create())
@@ -33,6 +35,7 @@ class AlertPrompt()
             "Food type" -> hint = "Ejemplo: Limon"
             "Food quantity" -> hint = "Ejemplo: 2"
             "Food or recipe" -> hint = "Ejemplo: comida o receta"
+            "Recipe Type" -> hint = "Ejemplo: Espaguetis"
         }
         return (hint)
     }
@@ -43,7 +46,8 @@ class AlertPrompt()
         when (reason) {
             "Food type" -> title = "Introduce que tipo de comida es la foto"
             "Food quantity" -> title = "Introduce la cantidad de alimentos que hay en la foto"
-            "Recipe or Food" -> title = "¿Es una comida o receta lo que hay en la foto?"
+            "Recipe or Food" -> title = "¿Es un ingrediente o receta lo que hay en la foto?"
+            "Recipe Type" -> title = "Introduce el tipo de receta"
         }
         return (title)
     }
