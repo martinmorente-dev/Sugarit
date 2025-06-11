@@ -5,7 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.recipie.RecipieActivity">
+    tools:context=".views.recipie.RecipieActivity"
+    >
 
     <ImageView
         android:id="@+id/fridge"
@@ -48,6 +49,7 @@
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textFridge"
+        android:textColorHint="#424242"
         app:layout_constraintVertical_bias="0.104">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -59,7 +61,10 @@
             android:hint="@string/ingredient_txt"
             android:inputType="textMultiLine"
             android:minLines="1"
-            android:padding="10dp" />
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textColorHint="#424242"
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton

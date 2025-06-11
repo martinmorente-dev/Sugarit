@@ -23,18 +23,18 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
         android:layout_gravity="center"
         android:text="@string/no_response"
         android:textColor="@color/black"
         android:textSize="25sp" />
 
     <ImageView
-        android:layout_margin="20sp"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_gravity="center"
+        android:layout_margin="20sp"
         android:contentDescription="@string/marsmallow_error"
-        android:src="@drawable/marshmello_without_load"
-        />
+        android:src="@drawable/marshmello_without_load" />
 
 </LinearLayout>

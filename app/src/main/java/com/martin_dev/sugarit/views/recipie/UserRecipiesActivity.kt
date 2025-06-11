@@ -3,6 +3,7 @@ package com.martin_dev.sugarit.views.recipie
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -45,10 +46,15 @@ class UserRecipiesActivity : AppCompatActivity() {
             },
             onItemClick = { recipe ->
                 var intent = Intent(this, InstructionsRecipeActivity::class.java)
-                intent.putExtra("urlImage",recipe.image)
-                intent.putExtra("recipeName",recipe.title)
-                intent.putExtra("recipeId",recipe.id)
+                intent.putExtra("urlImage", recipe.image)
+                intent.putExtra("recipeName", recipe.title)
+                intent.putExtra("recipeId", recipe.id)
                 startActivity(intent)
+            },
+            onEmptyChanged = {empty ->
+                binding.emptyView.visibility = if (empty) View.VISIBLE else View.GONE
+                binding.titleText.visibility = if (empty) View.GONE else View.VISIBLE
+                binding.recipieSaveRecycler.visibility = if (empty) View.GONE else View.VISIBLE
             }
         )
         binding.recipieSaveRecycler.layoutManager = LinearLayoutManager(this)

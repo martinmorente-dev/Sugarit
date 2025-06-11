@@ -8,24 +8,41 @@
     tools:context=".views.food.ItemCameraResultActivity"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/fondo_food"
     >
+
 
     <ImageButton
         android:id="@+id/backBtn"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="28dp"
         android:background="@color/fui_transparent"
         android:backgroundTint="@color/none"
         android:contentDescription="@string/backBtn"
         android:src="@drawable/go_back"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintHorizontal_bias="0.044"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_result_camera"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:shadowColor="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/foodRecipieImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.585" />
+
+    <ImageView
             android:id="@+id/foodRecipieImage"
             android:layout_width="300dp"
             android:layout_height="200dp"

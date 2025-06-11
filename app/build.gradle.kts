@@ -76,6 +76,6 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     implementation("com.google.firebase:firebase-database-ktx")
     implementation("com.google.mlkit:object-detection:17.0.2")
-
+    implementation("androidx.core:core-splashscreen:1.0.0")
 }
 

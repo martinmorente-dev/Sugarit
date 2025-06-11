@@ -7,7 +7,7 @@
     <!-- Login -->
 
     <string name="entry">Entrar</string>
-    <string name="username">email: hola@gmail.com</string>
+    <string name="username">email: user@gmail.com</string>
     <string name="user_passowrd">contraseña:</string>
     <string name="registration">Registrame</string>
 
@@ -21,6 +21,7 @@
     <string name="fridge_txt">¿Qué hay en la nevera?</string>
     <string name="ingredient_txt">Ejemplo: Arroz, Lechuga, Tomate</string>
     <string name="save_recipe_btn">Icono para guardar receta</string>
+    <string name="my_recipe">Mis Recetas Guardadas</string>
 
     <!-- Email Verification -->
     <string name="description_txt">Te enviamos un email de verificación por favor revisa tu bandeja de entrada</string>
@@ -35,6 +36,7 @@
     <string name="marshmallow">Imagen de un malvavisco esperando alégremente</string>
     <string name="marshmallowChef">Imagen Malvavisco</string>
     <string name="backBtn">Botón para ir hacia atrás</string>
+    <string name="splash_img">Icono App</string>
 
     <!-- Item Recipie Save-->
     <string name="erase_btn">Eliminar</string>
@@ -44,6 +46,14 @@
     <string name="ingredients">Ingredientes</string>
     <string name="steps">Pasos</string>
 
+    <!--Splash Screen-->
+    <string name="splash_screen_title">Sugarit</string>
+
+    <!-- Item camera Result -->
+    <string name="title_result_camera">Ingredientes Escaneados</string>
+
+    <!-- Item recipe nutrition -->
+    <string name="title_camera_nutrition">Recetas Escaneados</string>
 
     <!--Activity Result-->
     <string name="btn_user_recipies">Mis Recetas</string>

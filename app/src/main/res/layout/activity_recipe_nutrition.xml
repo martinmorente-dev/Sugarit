@@ -8,7 +8,6 @@
     tools:context=".views.food.ItemCameraResultActivity"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/fondo_food"
     >
 
     <ImageButton
@@ -20,8 +19,24 @@
         android:backgroundTint="@color/none"
         android:contentDescription="@string/backBtn"
         android:src="@drawable/go_back"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_camera_nutrition"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:shadowColor="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/foodRecipieImage"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

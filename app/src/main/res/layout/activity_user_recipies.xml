@@ -5,14 +5,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".views.recipie.UserRecipiesActivity"
-    android:orientation="horizontal"
-    android:gravity="center">
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="16dp">
 
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/my_recipe"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"
+        android:textColor="@color/black"/>
+
+    <LinearLayout
+        android:id="@+id/emptyView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_marginTop="32dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/no_response"
+            android:textColor="@color/black"
+            android:textSize="25sp" />
+
+        <ImageView
+            android:layout_margin="20sp"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/marsmallow_error"
+            android:src="@drawable/marshmello_without_load"
+            />
+    </LinearLayout>
+
+    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recipieSaveRecycler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-
-
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 </LinearLayout>

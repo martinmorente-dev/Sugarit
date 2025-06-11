@@ -2,18 +2,22 @@
     <!-- Base application theme. -->
     <style name="Theme.Sugarit" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="android:windowBackground">@color/background_app</item>
-        <item name="componentBackground">@color/background_component</item>
+        <item name="android:windowBackground">@drawable/background</item>
+        <item name="componentBackground">#2FCDF9CA</item>
         <item name="btnBackground">@color/background_btn</item>
         <item name="android:fontFamily">@font/roboto_condensed_medium</item>
 
     </style>
     <!-- Base application theme. -->
     <style name="Base.Theme.Sugarit" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="android:windowBackground">@color/background_app</item>
-        <item name="componentBackground">@color/background_component</item>
+        <item name="android:windowBackground">@drawable/background</item>
+        <item name="componentBackground">#2FCDF9CA</item>
         <item name="btnBackground">@color/background_btn</item>
         <item name="android:fontFamily">@font/roboto_condensed_medium</item>
-
     </style>
+
+    <style name="Theme.Design.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@color/background_app</item>
+    </style>
+
 </resources>

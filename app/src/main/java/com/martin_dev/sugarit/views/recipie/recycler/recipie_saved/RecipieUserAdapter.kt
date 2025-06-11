@@ -8,7 +8,8 @@ import com.martin_dev.sugarit.databinding.ActivityItemRecipieSaveBinding
 
 class RecipieUserAdapter(
     private val onDeleteClickListener: (Recipe) -> Unit,
-    private val onItemClick: (Recipe) -> Unit
+    private val onItemClick: (Recipe) -> Unit,
+    private val onEmptyChanged: (Boolean) -> Unit
 ) : RecyclerView.Adapter<RecipieUserViewHolder>() {
 
     private val recipes = mutableListOf<Recipe>()
@@ -17,6 +18,7 @@ class RecipieUserAdapter(
         recipes.clear()
         recipes.addAll(newRecipies)
         notifyDataSetChanged()
+        onEmptyChanged(recipes.isEmpty())
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipieUserViewHolder {
